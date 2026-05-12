@@ -559,9 +559,11 @@ function addToCart(id,name,price,photo,art){
 function removeFromCart(id){cart=cart.filter(i=>i.id!==id);localStorage.setItem('senso_cart',JSON.stringify(cart));updateCartUI();}
 function updateCartUI(){
   const tot=cart.reduce((s,i)=>s+i.qty,0);
-  document.getElementById('cbadge').textContent=tot;
+  const badge=document.getElementById('cbadge');
+  if(badge) badge.textContent=tot;
   const list=document.getElementById('cart-items');
   const footer=document.getElementById('cart-footer');
+  if(!list) return;
   if(!cart.length){
     list.innerHTML='<div class="cart-empty"><i class="ti ti-shopping-bag"></i><p style="font-size:11px;letter-spacing:1px;margin-top:.5rem;">КОШИК ПОРОЖНІЙ</p></div>';
     if(footer)footer.style.display='none';return;
@@ -606,7 +608,12 @@ function showToast(msg){
   setTimeout(()=>t.classList.remove('show'),2300);
 }
 
-init();
+// Запускаємо після повного завантаження DOM
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
 </script>
 </body>
 </html>
