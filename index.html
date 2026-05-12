@@ -11,8 +11,6 @@
 :root{--acc:#c0392b;--acc2:#e74c3c;--acc3:#8b1a1a;--bg:#faf8f8;--bg2:#fff;--bg3:#f5f0f0;--txt:#1a0a0a;--muted:#8a7070;--brd:rgba(192,57,43,0.12);--green:#27ae60;--gold:#c9a96e;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--txt);overflow-x:hidden;}
-
-/* ── NAV ── */
 .nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:rgba(250,248,248,0.97);border-bottom:1px solid var(--brd);position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);}
 .logo{font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:6px;font-weight:300;cursor:pointer;color:var(--txt);}
 .logo em{color:var(--acc);font-style:normal;}
@@ -24,55 +22,55 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--txt);o
 .nav-r i:hover{color:var(--acc);}
 .cw{position:relative;cursor:pointer;}
 .cbadge{position:absolute;top:-5px;right:-6px;background:var(--acc);color:#fff;font-size:9px;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
-
-/* ── PAGES ── */
 .page{display:none;}.page.on{display:block;}
 
-/* ── HERO ── */
-.hero{display:grid;grid-template-columns:1fr 1fr;min-height:88vh;overflow:hidden;}
-.hero-l{background:linear-gradient(135deg,#2d0f1e 0%,#1a0a10 100%);padding:5rem 3rem;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;}
-.hero-l::before{content:'';position:absolute;top:-80px;left:-80px;width:420px;height:420px;background:radial-gradient(circle,rgba(192,57,43,0.18),transparent 70%);pointer-events:none;}
-.hero-tag{font-size:10px;letter-spacing:4px;color:var(--acc);margin-bottom:1.5rem;animation:fadeUp .6s .1s both;}
-.hero-title{font-family:'Cormorant Garamond',serif;font-size:60px;font-weight:300;line-height:1.05;color:#f0e8e8;margin-bottom:1.2rem;animation:fadeUp .7s .2s both;}
+/* HERO — повна ширина з акцентом зліва */
+.hero{min-height:88vh;background:linear-gradient(135deg,#2d0f1e 0%,#1a0a10 100%);display:flex;align-items:center;padding:4rem 3rem;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-100px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(192,57,43,0.2),transparent 70%);pointer-events:none;}
+.hero::after{content:'';position:absolute;bottom:-80px;right:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(192,57,43,0.1),transparent 70%);pointer-events:none;}
+.hero-content{flex:0 0 42%;padding-right:3rem;z-index:1;}
+.hero-tag{font-size:10px;letter-spacing:4px;color:var(--acc);margin-bottom:1.5rem;}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:300;line-height:1.05;color:#f0e8e8;margin-bottom:1.2rem;}
 .hero-title strong{color:var(--acc);font-style:italic;display:block;}
-.hero-desc{font-size:13px;color:#9a8080;line-height:2;max-width:340px;margin-bottom:2rem;animation:fadeUp .6s .35s both;}
-.hero-trust{display:flex;flex-direction:column;gap:8px;margin-bottom:2rem;animation:fadeUp .6s .45s both;}
-.hero-trust-item{display:flex;align-items:center;gap:8px;font-size:11px;color:#7a6060;}
-.hero-trust-item i{font-size:14px;color:var(--acc);}
-.hero-btns{display:flex;gap:12px;animation:fadeUp .6s .55s both;}
+.hero-desc{font-size:13px;color:#9a8080;line-height:2;margin-bottom:1.5rem;}
+.hero-badges{display:flex;flex-direction:column;gap:7px;margin-bottom:2rem;}
+.hero-badge{display:flex;align-items:center;gap:8px;font-size:11px;color:#7a6060;}
+.hero-badge i{font-size:13px;color:var(--acc);}
+.hero-btns{display:flex;gap:12px;}
 .btn{display:inline-flex;align-items:center;gap:8px;background:var(--acc);color:#fff;padding:13px 28px;font-size:10px;letter-spacing:2.5px;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;transition:background .2s;}
 .btn:hover{background:var(--acc2);}
-.btn-o{background:transparent;border:1px solid rgba(240,232,232,0.25);color:#f0e8e8;padding:13px 28px;font-size:10px;letter-spacing:2.5px;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .2s;}
+.btn-o{background:transparent;border:1px solid rgba(240,232,232,0.2);color:#f0e8e8;padding:13px 28px;font-size:10px;letter-spacing:2.5px;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .2s;}
 .btn-o:hover{border-color:var(--acc);color:var(--acc);}
-/* HERO RIGHT — сітка товарів */
-.hero-r{background:#f2ebe8;padding:2rem;display:flex;flex-direction:column;justify-content:center;gap:1rem;overflow:hidden;}
-.hero-r-title{font-size:10px;letter-spacing:3px;color:var(--acc);margin-bottom:.5rem;text-align:center;}
-.hero-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;animation:fadeIn .8s .4s both;}
-.hpc{background:var(--bg2);border:1px solid var(--brd);cursor:pointer;transition:all .2s;overflow:hidden;}
-.hpc:hover{box-shadow:0 4px 16px rgba(192,57,43,0.12);transform:translateY(-2px);}
-.hpi{height:110px;background:var(--bg3);overflow:hidden;}
-.hpi img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
-.hpc:hover .hpi img{transform:scale(1.06);}
+/* Hero products - справа */
+.hero-products{flex:1;z-index:1;}
+.hero-prod-title{font-size:9px;letter-spacing:3px;color:rgba(192,57,43,0.7);margin-bottom:1rem;text-align:center;}
+.hero-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.hpc{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);cursor:pointer;transition:all .25s;overflow:hidden;backdrop-filter:blur(4px);}
+.hpc:hover{background:rgba(255,255,255,0.1);border-color:rgba(192,57,43,0.4);transform:translateY(-2px);}
+.hpi{height:120px;overflow:hidden;background:rgba(0,0,0,0.2);}
+.hpi img{width:100%;height:100%;object-fit:cover;transition:transform .4s;opacity:0.85;}
+.hpc:hover .hpi img{transform:scale(1.06);opacity:1;}
 .hpi-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
-.hpi-ph i{font-size:28px;color:var(--acc);opacity:0.2;}
-.hpc-info{padding:.5rem .6rem;}
-.hpc-n{font-size:10px;color:var(--txt);line-height:1.3;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:2px;}
+.hpi-ph i{font-size:28px;color:rgba(192,57,43,0.4);}
+.hpc-info{padding:.6rem .7rem;}
+.hpc-s{font-size:8px;letter-spacing:1.5px;color:rgba(192,57,43,0.7);margin-bottom:2px;}
+.hpc-n{font-size:10px;color:#e0d8d8;line-height:1.3;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:3px;}
 .hpc-p{font-size:11px;font-weight:500;color:var(--acc);}
-.hero-r-btn{background:var(--acc);color:#fff;border:none;padding:10px;font-size:10px;letter-spacing:2px;cursor:pointer;font-family:'Montserrat',sans-serif;transition:background .2s;text-align:center;}
-.hero-r-btn:hover{background:var(--acc2);}
+.hero-grid-btn{margin-top:12px;width:100%;background:rgba(192,57,43,0.2);border:1px solid rgba(192,57,43,0.3);color:#f0e8e8;padding:10px;font-size:10px;letter-spacing:2px;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .2s;text-align:center;}
+.hero-grid-btn:hover{background:var(--acc);border-color:var(--acc);}
 
-/* ── STRIP ── */
+/* STRIP */
 .strip{background:var(--acc3);padding:.75rem 2rem;display:flex;justify-content:center;gap:3rem;font-size:10px;letter-spacing:2px;color:rgba(240,232,232,0.8);}
 .strip span{display:flex;align-items:center;gap:6px;}
 
-/* ── SECTIONS ── */
+/* SECTIONS */
 .sec{padding:3.5rem 2rem;}
 .sh{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:1.8rem;}
 .st{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;}
 .st em{color:var(--acc);font-style:italic;}
 .slink{font-size:10px;letter-spacing:2px;color:var(--acc);cursor:pointer;}
 
-/* ── CATEGORIES ── */
+/* CATEGORIES */
 .cats{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;}
 .cc{background:var(--bg2);border:1px solid var(--brd);padding:1.8rem .8rem;text-align:center;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;}
 .cc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--acc);transform:scaleX(0);transition:transform .3s;}
@@ -82,8 +80,8 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--txt);o
 .cc-n{font-size:10px;letter-spacing:1.5px;color:var(--txt);margin-bottom:3px;}
 .cc-c{font-size:10px;color:var(--muted);}
 
-/* ── PRODUCTS GRID ── */
-.pg{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+/* PRODUCTS */
+.pgg{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
 .pc{background:var(--bg2);border:1px solid var(--brd);cursor:pointer;transition:all .25s;overflow:hidden;}
 .pc:hover{box-shadow:0 8px 28px rgba(192,57,43,0.1);transform:translateY(-2px);}
 .pi{height:200px;background:var(--bg3);position:relative;overflow:hidden;}
@@ -96,7 +94,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--txt);o
 .pbadge.soon{background:#f5f5f5;border:1px solid #ddd;color:#999;}
 .pov{position:absolute;bottom:0;left:0;right:0;transform:translateY(100%);transition:transform .3s;z-index:3;padding:8px;}
 .pc:hover .pov{transform:translateY(0);}
-.padd{width:100%;background:var(--acc);color:#fff;font-size:9px;letter-spacing:2px;padding:9px;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;transition:background .2s;}
+.padd{width:100%;background:var(--acc);color:#fff;font-size:9px;letter-spacing:2px;padding:9px;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;}
 .padd:hover{background:var(--acc2);}
 .padd.soon{background:#f5f0f0;border:1px solid #e0d0d0;color:#aaa;}
 .pinfo{padding:.8rem;}
@@ -105,7 +103,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--txt);o
 .pprice{font-size:14px;font-weight:500;color:var(--txt);}
 .pnotify{font-size:10px;color:#bbb;font-style:italic;}
 
-/* ── CATALOG PAGE ── */
+/* CATALOG */
 .cat-pg{display:grid;grid-template-columns:220px 1fr;}
 .sb{background:var(--bg2);border-right:1px solid var(--brd);padding:1.5rem;position:sticky;top:57px;height:calc(100vh - 57px);overflow-y:auto;}
 .sb::-webkit-scrollbar{width:3px;}
@@ -121,22 +119,22 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--txt);o
 .pr input{background:var(--bg3);border:1px solid var(--brd);color:var(--txt);padding:5px 7px;font-size:11px;width:68px;font-family:'Montserrat',sans-serif;border-radius:3px;outline:none;}
 .pr input:focus{border-color:var(--acc);}
 .ab{width:100%;background:var(--acc);color:#fff;border:none;padding:7px;font-size:10px;letter-spacing:2px;cursor:pointer;margin-top:.5rem;font-family:'Montserrat',sans-serif;border-radius:3px;}
-.ss{width:100%;background:var(--bg3);border:1px solid var(--brd);color:var(--txt);padding:7px;font-size:11px;font-family:'Montserrat',sans-serif;border-radius:3px;outline:none;cursor:pointer;}
+.srt{width:100%;background:var(--bg3);border:1px solid var(--brd);color:var(--txt);padding:7px;font-size:11px;font-family:'Montserrat',sans-serif;border-radius:3px;outline:none;cursor:pointer;}
 .cat-main{padding:1.5rem;}
-.si{width:100%;background:var(--bg2);border:1px solid var(--brd);color:var(--txt);padding:10px 14px;font-size:12px;font-family:'Montserrat',sans-serif;border-radius:3px;outline:none;margin-bottom:1.5rem;}
-.si:focus{border-color:var(--acc);}
-.si::placeholder{color:var(--muted);}
+.sinp{width:100%;background:var(--bg2);border:1px solid var(--brd);color:var(--txt);padding:10px 14px;font-size:12px;font-family:'Montserrat',sans-serif;border-radius:3px;outline:none;margin-bottom:1.5rem;}
+.sinp:focus{border-color:var(--acc);}
+.sinp::placeholder{color:var(--muted);}
 
-/* ── PRODUCT PAGE ── */
+/* PRODUCT PAGE */
 .prod-back{display:flex;align-items:center;gap:8px;padding:1rem 2rem;font-size:11px;letter-spacing:1.5px;color:var(--muted);cursor:pointer;background:var(--bg2);border-bottom:1px solid var(--brd);transition:color .2s;}
 .prod-back:hover{color:var(--acc);}
 .prod-layout{display:grid;grid-template-columns:1fr 1fr;}
 .prod-gal{background:var(--bg2);border-right:1px solid var(--brd);}
-.main-ph{height:460px;overflow:hidden;position:relative;}
+.main-ph{height:460px;overflow:hidden;}
 .main-ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
 .main-ph:hover img{transform:scale(1.04);}
-.thumbs-row{display:flex;gap:8px;padding:10px;background:var(--bg3);}
-.thumb{width:58px;height:58px;border:1px solid var(--brd);cursor:pointer;overflow:hidden;flex-shrink:0;transition:border-color .2s;}
+.thumbs-r{display:flex;gap:8px;padding:10px;background:var(--bg3);}
+.thumb{width:58px;height:58px;border:1px solid var(--brd);cursor:pointer;overflow:hidden;transition:border-color .2s;}
 .thumb:hover,.thumb.on{border-color:var(--acc);}
 .thumb img{width:100%;height:100%;object-fit:cover;}
 .prod-inf{padding:2rem;display:flex;flex-direction:column;gap:1rem;}
@@ -164,20 +162,17 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--txt);o
 .ptab.on{color:var(--acc);border-bottom-color:var(--acc);}
 .tab-b{display:none;padding:.9rem 0;font-size:12px;color:var(--muted);line-height:1.9;}
 .tab-b.on{display:block;}
-.spec-row{display:flex;justify-content:space-between;padding:.35rem 0;border-bottom:1px solid var(--brd);font-size:11px;}
-.spec-row:last-child{border:none;}
+.spec-r{display:flex;justify-content:space-between;padding:.35rem 0;border-bottom:1px solid var(--brd);font-size:11px;}
+.spec-r:last-child{border:none;}
 .spec-l{color:var(--muted);}
 .spec-v{color:var(--txt);}
-/* REVIEWS */
-.rev-item{background:var(--bg3);padding:1rem;margin-bottom:.8rem;border-radius:3px;}
+.rev-i{background:var(--bg3);padding:1rem;margin-bottom:.8rem;border-radius:3px;}
 .rev-stars{color:var(--gold);font-size:12px;margin-bottom:.3rem;}
 .rev-meta{font-size:10px;color:var(--muted);margin-bottom:.4rem;}
 .rev-text{font-size:12px;color:var(--txt);line-height:1.7;}
+.upsell{padding:2.5rem 2rem;border-top:1px solid var(--brd);}
 
-/* ── UPSELL / CROSS ── */
-.upsell-sec{padding:2.5rem 2rem;border-top:1px solid var(--brd);}
-
-/* ── INFO PAGES ── */
+/* INFO PAGES */
 .pg-hero{padding:3rem 2rem 2rem;background:var(--bg2);border-bottom:1px solid var(--brd);position:relative;overflow:hidden;}
 .pg-hero::before{content:'SENSO';position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-family:'Cormorant Garamond',serif;font-size:90px;font-weight:300;color:rgba(192,57,43,0.04);letter-spacing:10px;pointer-events:none;}
 .pg-tag{font-size:10px;letter-spacing:4px;color:var(--acc);margin-bottom:.8rem;}
@@ -193,19 +188,19 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--txt);o
 .vi i{font-size:26px;color:var(--acc);display:block;margin-bottom:.7rem;}
 .vi h4{font-size:11px;letter-spacing:2px;color:var(--txt);margin-bottom:.4rem;font-weight:400;}
 .vi p{font-size:12px;color:var(--muted);line-height:1.7;}
-.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--brd);margin:2rem;}
-.si-s{background:var(--bg2);padding:1.8rem 1.5rem;}
-.si-n{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;color:rgba(192,57,43,0.12);line-height:1;margin-bottom:.4rem;}
-.si-s h4{font-size:11px;letter-spacing:1.5px;color:var(--txt);margin-bottom:.4rem;font-weight:400;}
-.si-s p{font-size:12px;color:var(--muted);line-height:1.7;}
-.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--brd);margin:0 2rem 2rem;}
-.pcard{background:var(--bg2);padding:2rem;display:flex;align-items:center;gap:1rem;}
-.pcard i{font-size:24px;color:var(--acc);flex-shrink:0;}
-.pcard h4{font-size:11px;letter-spacing:1.5px;color:var(--txt);margin-bottom:.3rem;font-weight:400;}
-.pcard p{font-size:12px;color:var(--muted);}
-.cg{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--brd);margin:2rem;}
-.cb-b{background:var(--bg2);padding:2.5rem;}
-.cb-b h3{font-size:10px;letter-spacing:3px;color:var(--acc);margin-bottom:1.5rem;font-weight:400;}
+.steps-g{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--brd);margin:2rem;}
+.step{background:var(--bg2);padding:1.8rem 1.5rem;}
+.step-n{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;color:rgba(192,57,43,0.12);line-height:1;margin-bottom:.4rem;}
+.step h4{font-size:11px;letter-spacing:1.5px;color:var(--txt);margin-bottom:.4rem;font-weight:400;}
+.step p{font-size:12px;color:var(--muted);line-height:1.7;}
+.pay-g{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--brd);margin:0 2rem 2rem;}
+.pay-c{background:var(--bg2);padding:2rem;display:flex;align-items:center;gap:1rem;}
+.pay-c i{font-size:24px;color:var(--acc);flex-shrink:0;}
+.pay-c h4{font-size:11px;letter-spacing:1.5px;color:var(--txt);margin-bottom:.3rem;font-weight:400;}
+.pay-c p{font-size:12px;color:var(--muted);}
+.cont-g{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--brd);margin:2rem;}
+.cont-b{background:var(--bg2);padding:2.5rem;}
+.cont-b h3{font-size:10px;letter-spacing:3px;color:var(--acc);margin-bottom:1.5rem;font-weight:400;}
 .ci-c{display:flex;align-items:center;gap:1rem;padding:.7rem 0;border-bottom:1px solid var(--brd);}
 .ci-c:last-child{border:none;}
 .ci-c i{font-size:18px;color:var(--acc);width:22px;flex-shrink:0;}
@@ -218,17 +213,12 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--txt);o
 .faq-i.open .faq-a{max-height:200px;padding-bottom:1rem;}
 .faq-i.open .faq-q i{transform:rotate(45deg);}
 
-/* ── PAGINATION ── */
+/* PAGINATION */
 .pgn{display:flex;justify-content:center;gap:6px;padding:2rem;}
 .pgb{background:var(--bg2);border:1px solid var(--brd);color:var(--muted);width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;border-radius:3px;transition:all .2s;}
 .pgb:hover,.pgb.on{background:var(--acc);border-color:var(--acc);color:#fff;}
 
-/* ── LOADING ── */
-.loading{text-align:center;padding:4rem 2rem;color:var(--muted);}
-.loading i{font-size:32px;display:block;margin-bottom:1rem;color:var(--acc);animation:spin 1s linear infinite;}
-@keyframes spin{to{transform:rotate(360deg);}}
-
-/* ── CART DRAWER ── */
+/* CART */
 .ov{position:fixed;inset:0;background:rgba(26,10,10,0.4);z-index:400;display:none;}
 .ov.on{display:block;}
 .cd{position:fixed;top:0;right:0;width:350px;height:100%;background:var(--bg2);border-left:1px solid var(--brd);z-index:500;transform:translateX(100%);transition:transform .35s;display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(192,57,43,0.08);}
@@ -243,9 +233,9 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--txt);o
 .cdi-img{width:52px;height:52px;background:var(--bg3);flex-shrink:0;overflow:hidden;border-radius:3px;}
 .cdi-img img{width:100%;height:100%;object-fit:cover;}
 .cdi-art{font-size:9px;letter-spacing:1.5px;color:var(--acc);margin-bottom:2px;}
-.cdi-name{font-size:11px;color:var(--txt);line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-.cdi-price{font-size:12px;color:var(--acc);font-weight:500;}
-.cdi-qty{font-size:10px;color:var(--muted);}
+.cdi-n{font-size:11px;color:var(--txt);line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.cdi-p{font-size:12px;color:var(--acc);font-weight:500;}
+.cdi-q{font-size:10px;color:var(--muted);}
 .cdi-rm{background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px;align-self:flex-start;flex-shrink:0;}
 .cdi-rm:hover{color:var(--acc);}
 .ce{text-align:center;padding:3rem 1rem;color:var(--muted);}
@@ -257,7 +247,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--txt);o
 .co-btn{width:100%;background:var(--acc);color:#fff;border:none;padding:13px;font-size:11px;letter-spacing:2.5px;cursor:pointer;font-family:'Montserrat',sans-serif;transition:background .2s;}
 .co-btn:hover{background:var(--acc2);}
 
-/* ── FOOTER ── */
+/* FOOTER */
 .footer{background:#1a0808;padding:2.5rem 2rem;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;border-top:1px solid var(--brd);}
 .fl{font-family:'Cormorant Garamond',serif;font-size:19px;letter-spacing:6px;font-weight:300;color:#f0e8e8;margin-bottom:.8rem;}
 .fl em{color:var(--acc);font-style:normal;}
@@ -266,29 +256,22 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--txt);o
 .fc a{display:block;font-size:12px;color:#5a3030;text-decoration:none;margin-bottom:.5rem;cursor:pointer;transition:color .2s;}
 .fc a:hover{color:var(--acc);}
 .fb{background:#100505;color:#3a1515;font-size:10px;padding:.9rem 2rem;display:flex;justify-content:space-between;letter-spacing:1.5px;}
-
-/* ── TG FAB ── */
 .tgf{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--acc);color:#fff;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:21px;cursor:pointer;z-index:200;box-shadow:0 4px 20px rgba(192,57,43,0.35);transition:transform .2s;}
 .tgf:hover{transform:scale(1.1);}
-
-/* ── TRUST ── */
 .trust{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--brd);}
 .tc{background:var(--bg2);padding:2.5rem 2rem;text-align:center;}
 .tc i{font-size:26px;color:var(--acc);display:block;margin-bottom:.8rem;}
 .tc h3{font-size:11px;letter-spacing:2px;color:var(--txt);margin-bottom:.5rem;font-weight:400;}
 .tc p{font-size:12px;color:var(--muted);line-height:1.8;}
-
-/* ── TOAST ── */
 .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--txt);color:#fff;padding:.65rem 1.4rem;font-size:11px;letter-spacing:1px;z-index:999;opacity:0;transition:opacity .3s;white-space:nowrap;pointer-events:none;border-radius:3px;}
 .toast.show{opacity:1;}
-
-/* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s;}
 .reveal.vis{opacity:1;transform:none;}
-
+.loading{text-align:center;padding:4rem;color:var(--muted);}
+.loading i{font-size:32px;display:block;margin-bottom:1rem;color:var(--acc);animation:spin 1s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-@keyframes pulse{0%,100%{transform:scale(1);opacity:.7;}50%{transform:scale(1.06);opacity:.3;}}
+@keyframes pulse{0%,100%{opacity:.7;transform:scale(1);}50%{opacity:.3;transform:scale(1.05);}}
 </style>
 </head>
 <body>
@@ -311,35 +294,35 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--txt);o
   </div>
 </nav>
 
-<!-- ══ ГОЛОВНА ══ -->
+<!-- ГОЛОВНА -->
 <div class="page on" id="page-home">
   <div class="hero">
-    <div class="hero-l">
+    <div class="hero-content">
       <div class="hero-tag">SENSO STORE · ОФІЦІЙНИЙ МАГАЗИН</div>
       <h1 class="hero-title">Відчуй<strong>більше</strong></h1>
       <p class="hero-desc">Преміальні товари для дорослих. Безпечно, конфіденційно, швидко по всій Україні.</p>
-      <div class="hero-trust">
-        <div class="hero-trust-item"><i class="ti ti-certificate"></i> Сертифіковано МОЗ України</div>
-        <div class="hero-trust-item"><i class="ti ti-shield-check"></i> Нейтральне пакування</div>
-        <div class="hero-trust-item"><i class="ti ti-truck-delivery"></i> НП та Укрпошта по всій Україні</div>
+      <div class="hero-badges">
+        <div class="hero-badge"><i class="ti ti-certificate"></i>Сертифіковано МОЗ України</div>
+        <div class="hero-badge"><i class="ti ti-shield-check"></i>Нейтральне пакування</div>
+        <div class="hero-badge"><i class="ti ti-truck-delivery"></i>НП та Укрпошта по всій Україні</div>
       </div>
       <div class="hero-btns">
         <button class="btn" onclick="showPage('catalog')">ДО ПОКУПОК <i class="ti ti-arrow-right"></i></button>
         <button class="btn-o" onclick="showPage('about')">ПРО НАС</button>
       </div>
     </div>
-    <div class="hero-r">
-      <div class="hero-r-title">ПОПУЛЯРНІ ТОВАРИ</div>
+    <div class="hero-products">
+      <div class="hero-prod-title">ПОПУЛЯРНІ ТОВАРИ</div>
       <div class="hero-grid" id="hero-grid"></div>
-      <button class="hero-r-btn" onclick="showPage('catalog')">ПЕРЕГЛЯНУТИ ВЕСЬ КАТАЛОГ →</button>
+      <button class="hero-grid-btn" onclick="showPage('catalog')">ПЕРЕГЛЯНУТИ ВЕСЬ КАТАЛОГ →</button>
     </div>
   </div>
 
   <div class="strip">
-    <span><i class="ti ti-shield-check"></i> БЕЗКОШТОВНА ДОСТАВКА ВІД 1500 ГРН</span>
-    <span><i class="ti ti-package"></i> ДИСКРЕТНЕ ПАКУВАННЯ</span>
-    <span><i class="ti ti-certificate"></i> СЕРТИФІКОВАНО МОЗ</span>
-    <span><i class="ti ti-refresh"></i> ПОВЕРНЕННЯ 14 ДНІВ</span>
+    <span><i class="ti ti-shield-check"></i>БЕЗКОШТОВНА ДОСТАВКА ВІД 1500 ГРН</span>
+    <span><i class="ti ti-package"></i>ДИСКРЕТНЕ ПАКУВАННЯ</span>
+    <span><i class="ti ti-certificate"></i>СЕРТИФІКОВАНО МОЗ</span>
+    <span><i class="ti ti-refresh"></i>ПОВЕРНЕННЯ 14 ДНІВ</span>
   </div>
 
   <div class="sec reveal">
@@ -350,13 +333,13 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--txt);o
       <div class="cc" onclick="filterCat('for-him')"><i class="ti ti-bolt"></i><div class="cc-n">ДЛЯ НЬОГО</div><div class="cc-c" id="ch-him">0</div></div>
       <div class="cc" onclick="filterCat('for-couples')"><i class="ti ti-users"></i><div class="cc-n">ДЛЯ ПАР</div><div class="cc-c" id="ch-pair">0</div></div>
       <div class="cc" onclick="filterCat('cosmetics')"><i class="ti ti-star"></i><div class="cc-n">КОСМЕТИКА</div><div class="cc-c" id="ch-cosm">0</div></div>
-      <div class="cc" onclick="filterCat('lingerie')"><i class="ti ti-shirt"></i><div class="cc-n">БІЛИЗНА</div><div class="cc-c" id="ch-ling">Скоро</div></div>
+      <div class="cc" onclick="filterCat('lingerie')"><i class="ti ti-shirt"></i><div class="cc-n">БІЛИЗНА</div><div class="cc-c">Скоро</div></div>
     </div>
   </div>
 
   <div class="sec reveal" style="padding-top:0">
     <div class="sh"><div class="st">Попу<em>лярне</em></div><span class="slink" onclick="showPage('catalog')">ВСЕ →</span></div>
-    <div class="pg" id="home-prods"><div class="loading"><i class="ti ti-loader"></i>Завантаження...</div></div>
+    <div class="pgg" id="home-prods"><div class="loading"><i class="ti ti-loader"></i>Завантаження...</div></div>
   </div>
 
   <div class="trust reveal">
@@ -366,7 +349,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--txt);o
   </div>
 </div>
 
-<!-- ══ КАТАЛОГ ══ -->
+<!-- КАТАЛОГ -->
 <div class="page" id="page-catalog">
   <div style="padding:1.5rem 2rem 1rem;background:var(--bg2);border-bottom:1px solid var(--brd);">
     <div style="font-size:10px;letter-spacing:2px;color:var(--muted);margin-bottom:.5rem;">SENSO › <span style="color:var(--acc)">Каталог</span></div>
@@ -374,7 +357,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--txt);o
     <div id="cat-lbl" style="font-size:11px;color:var(--muted);margin-top:.3rem;">Завантаження...</div>
   </div>
   <div style="padding:.8rem 2rem;background:var(--bg2);border-bottom:1px solid var(--brd);">
-    <input class="si" type="text" placeholder="Пошук товарів..." id="search-q" oninput="renderCatalog()">
+    <input class="sinp" type="text" placeholder="Пошук товарів..." id="search-q" oninput="renderCatalog()">
   </div>
   <div class="cat-pg">
     <div class="sb">
@@ -391,9 +374,9 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--txt);o
       <div class="sb-s">
         <div class="sb-t">СЕГМЕНТ</div>
         <button class="sb-b on" onclick="setSeg('all',this)">Всі ціни</button>
-        <button class="sb-b" onclick="setSeg('budget',this)">До 800 грн</button>
-        <button class="sb-b" onclick="setSeg('mid',this)">800–2500 грн</button>
-        <button class="sb-b" onclick="setSeg('premium',this)">2500+ (Люкс)</button>
+        <button class="sb-b" onclick="setSeg('b',this)">До 800 грн</button>
+        <button class="sb-b" onclick="setSeg('m',this)">800–2500 грн</button>
+        <button class="sb-b" onclick="setSeg('p',this)">2500+ (Люкс)</button>
       </div>
       <div class="sb-s">
         <div class="sb-t">ЦІНА (ГРН)</div>
@@ -402,28 +385,28 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--txt);o
       </div>
       <div class="sb-s">
         <div class="sb-t">СОРТУВАННЯ</div>
-        <select class="ss" id="sort-sel" onchange="renderCatalog()">
+        <select class="srt" id="srt" onchange="renderCatalog()">
           <option value="d">За замовчуванням</option>
-          <option value="pa">Ціна: від дешевих</option>
-          <option value="pd">Ціна: від дорогих</option>
+          <option value="pa">Від дешевих</option>
+          <option value="pd">Від дорогих</option>
           <option value="na">Назва А–Я</option>
         </select>
       </div>
     </div>
     <div class="cat-main">
-      <div class="pg" id="cat-grid"><div class="loading"><i class="ti ti-loader"></i>Завантаження...</div></div>
+      <div class="pgg" id="cat-grid"><div class="loading"><i class="ti ti-loader"></i>Завантаження...</div></div>
       <div class="pgn" id="pgn"></div>
     </div>
   </div>
 </div>
 
-<!-- ══ СТОРІНКА ТОВАРУ ══ -->
+<!-- ТОВАР -->
 <div class="page" id="page-product">
   <div class="prod-back" onclick="showPage('catalog')"><i class="ti ti-arrow-left"></i> ПОВЕРНУТИСЬ ДО КАТАЛОГУ</div>
   <div class="prod-layout">
     <div class="prod-gal">
       <div class="main-ph"><img id="prod-img" src="" alt=""></div>
-      <div class="thumbs-row" id="prod-thumbs"></div>
+      <div class="thumbs-r" id="prod-thumbs"></div>
     </div>
     <div class="prod-inf">
       <div class="prod-sub" id="prod-cat"></div>
@@ -446,71 +429,50 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--txt);o
         <div class="del-i"><i class="ti ti-credit-card"></i><div><strong>Зручна оплата</strong><span>Картка, LiqPay</span></div></div>
         <div class="del-i"><i class="ti ti-refresh"></i><div><strong>Повернення</strong><span>14 днів</span></div></div>
       </div>
-      <div class="cert-b"><i class="ti ti-certificate" style="font-size:16px"></i> СЕРТИФІКОВАНО МОЗ УКРАЇНИ</div>
+      <div class="cert-b"><i class="ti ti-certificate" style="font-size:16px"></i>СЕРТИФІКОВАНО МОЗ УКРАЇНИ</div>
       <div>
         <div class="prod-tabs">
           <div class="ptab on" onclick="showTab('desc',this)">ОПИС</div>
           <div class="ptab" onclick="showTab('chars',this)">ХАРАКТЕРИСТИКИ</div>
-          <div class="ptab" onclick="showTab('reviews',this)">ВІДГУКИ</div>
+          <div class="ptab" onclick="showTab('rev',this)">ВІДГУКИ</div>
         </div>
         <div class="tab-b on" id="tab-desc"></div>
         <div class="tab-b" id="tab-chars"></div>
-        <div class="tab-b" id="tab-reviews"></div>
+        <div class="tab-b" id="tab-rev"></div>
       </div>
     </div>
   </div>
-  <div class="upsell-sec">
+  <div class="upsell">
     <div class="sh"><div class="st">З цим <em>також беруть</em></div></div>
-    <div class="pg" id="upsell-grid"></div>
+    <div class="pgg" id="upsell-g"></div>
   </div>
 </div>
 
-<!-- ══ ПРО НАС ══ -->
+<!-- ПРО НАС -->
 <div class="page" id="page-about">
   <div class="pg-hero"><div class="pg-tag">ПРО МАГАЗИН</div><div class="pg-title">Про<br><em>нас</em></div></div>
-  <div class="ig">
-    <div class="ib"><h3>ХТО МИ</h3><p><strong>SENSO</strong> — український онлайн-магазин преміальних товарів для дорослих. Широкий асортимент перевіреної продукції — зручно, безпечно, без сорому.</p></div>
-    <div class="ib"><h3>НАШІ ПРИНЦИПИ</h3><p>Конфіденційність, якість і чесний сервіс — наш стандарт. Всі товари сертифіковані <strong>МОЗ України</strong>.</p></div>
-  </div>
-  <div class="vg">
-    <div class="vi"><i class="ti ti-shield-check"></i><h4>КОНФІДЕНЦІЙНІСТЬ</h4><p>Нейтральне пакування без назви магазину.</p></div>
-    <div class="vi"><i class="ti ti-certificate"></i><h4>ЯКІСТЬ І БЕЗПЕКА</h4><p>Сертифікована продукція МОЗ України.</p></div>
-    <div class="vi"><i class="ti ti-heart"></i><h4>ТУРБОТА</h4><p>Відповімо на будь-яке питання.</p></div>
-  </div>
+  <div class="ig"><div class="ib"><h3>ХТО МИ</h3><p><strong>SENSO</strong> — український онлайн-магазин преміальних товарів для дорослих. Широкий асортимент перевіреної продукції — зручно, безпечно, без сорому.</p></div><div class="ib"><h3>НАШІ ПРИНЦИПИ</h3><p>Конфіденційність, якість і чесний сервіс — наш стандарт. Всі товари сертифіковані <strong>МОЗ України</strong>.</p></div></div>
+  <div class="vg"><div class="vi"><i class="ti ti-shield-check"></i><h4>КОНФІДЕНЦІЙНІСТЬ</h4><p>Нейтральне пакування без назви магазину.</p></div><div class="vi"><i class="ti ti-certificate"></i><h4>ЯКІСТЬ І БЕЗПЕКА</h4><p>Сертифікована продукція МОЗ України.</p></div><div class="vi"><i class="ti ti-heart"></i><h4>ТУРБОТА</h4><p>Відповімо на будь-яке питання.</p></div></div>
 </div>
 
-<!-- ══ ДОСТАВКА ══ -->
+<!-- ДОСТАВКА -->
 <div class="page" id="page-delivery">
   <div class="pg-hero"><div class="pg-tag">УМОВИ РОБОТИ</div><div class="pg-title">Доставка<br><em>та оплата</em></div></div>
-  <div class="sg">
-    <div class="si-s"><div class="si-n">01</div><h4>ОФОРМЛЕННЯ</h4><p>Обираєш товар, додаєш у кошик</p></div>
-    <div class="si-s"><div class="si-n">02</div><h4>ПІДТВЕРДЖЕННЯ</h4><p>Менеджер підтверджує 1–2 год</p></div>
-    <div class="si-s"><div class="si-n">03</div><h4>ВІДПРАВКА</h4><p>В день замовлення або наступного дня</p></div>
-    <div class="si-s"><div class="si-n">04</div><h4>ОТРИМАННЯ</h4><p>У відділенні. Нейтральне пакування</p></div>
-  </div>
-  <div class="ig">
-    <div class="ib"><h3>ДОСТАВКА</h3><p><strong>Нова Пошта</strong> — відділення або поштомат<br><strong>Укрпошта</strong> — відділення по Україні<br><br>Безкоштовна від <strong>1 500 грн</strong><br>Термін: <strong>1–3 робочих дні</strong></p></div>
-    <div class="ib"><h3>ОПЛАТА</h3><p><strong>LiqPay / Картка</strong> — Visa, Mastercard<br><strong>Monobank / ПриватБанк</strong> — переказ<br><br>Після оплати надішли скріншот у відповідь на підтвердження</p></div>
-  </div>
-  <div class="pg">
-    <div class="pcard"><i class="ti ti-credit-card"></i><div><h4>LIQPAY / КАРТКА</h4><p>Visa, Mastercard онлайн.</p></div></div>
-    <div class="pcard"><i class="ti ti-building-bank"></i><div><h4>ПЕРЕКАЗ</h4><p>Monobank або ПриватБанк.</p></div></div>
-    <div class="pcard"><i class="ti ti-refresh"></i><div><h4>ПОВЕРНЕННЯ</h4><p>14 днів, оригінальне пакування.</p></div></div>
-  </div>
+  <div class="steps-g"><div class="step"><div class="step-n">01</div><h4>ОФОРМЛЕННЯ</h4><p>Обираєш товар, додаєш у кошик</p></div><div class="step"><div class="step-n">02</div><h4>ПІДТВЕРДЖЕННЯ</h4><p>Менеджер підтверджує 1–2 год</p></div><div class="step"><div class="step-n">03</div><h4>ВІДПРАВКА</h4><p>В день замовлення або наступного дня</p></div><div class="step"><div class="step-n">04</div><h4>ОТРИМАННЯ</h4><p>У відділенні. Нейтральне пакування</p></div></div>
+  <div class="ig"><div class="ib"><h3>ДОСТАВКА</h3><p><strong>Нова Пошта</strong> — відділення або поштомат<br><strong>Укрпошта</strong> — відділення по Україні<br><br>Безкоштовна від <strong>1 500 грн</strong><br>Термін: <strong>1–3 робочих дні</strong></p></div><div class="ib"><h3>ОПЛАТА</h3><p><strong>LiqPay / Картка</strong> — Visa, Mastercard<br><strong>Monobank / ПриватБанк</strong> — переказ<br><br>Після оплати надішли скріншот у відповідь на підтвердження</p></div></div>
+  <div class="pay-g"><div class="pay-c"><i class="ti ti-credit-card"></i><div><h4>LIQPAY / КАРТКА</h4><p>Visa, Mastercard онлайн.</p></div></div><div class="pay-c"><i class="ti ti-building-bank"></i><div><h4>ПЕРЕКАЗ</h4><p>Monobank або ПриватБанк.</p></div></div><div class="pay-c"><i class="ti ti-refresh"></i><div><h4>ПОВЕРНЕННЯ</h4><p>14 днів, оригінальне пакування.</p></div></div></div>
 </div>
 
-<!-- ══ КОНТАКТИ ══ -->
+<!-- КОНТАКТИ -->
 <div class="page" id="page-contacts">
   <div class="pg-hero"><div class="pg-tag">ЗВ'ЯЖІТЬСЯ З НАМИ</div><div class="pg-title">Конта<em>кти</em></div></div>
-  <div class="cg">
-    <div class="cb-b">
-      <h3>НАШІ КОНТАКТИ</h3>
+  <div class="cont-g">
+    <div class="cont-b"><h3>НАШІ КОНТАКТИ</h3>
       <div class="ci-c"><i class="ti ti-phone"></i><div><span class="ci-lbl">ТЕЛЕФОН</span><span class="ci-val">Буде вказано найближчим часом</span></div></div>
       <div class="ci-c"><i class="ti ti-brand-telegram"></i><div><span class="ci-lbl">TELEGRAM</span><span class="ci-val">Буде вказано найближчим часом</span></div></div>
       <div class="ci-c"><i class="ti ti-clock"></i><div><span class="ci-lbl">ГРАФІК</span><span class="ci-val">Пн–Нд: 9:00 – 21:00</span></div></div>
     </div>
-    <div class="cb-b">
-      <h3>ЧАСТІ ПИТАННЯ</h3>
+    <div class="cont-b"><h3>ЧАСТІ ПИТАННЯ</h3>
       <div class="faq-i" onclick="this.classList.toggle('open')"><div class="faq-q">Пакування нейтральне? <i class="ti ti-plus"></i></div><div class="faq-a">Так, 100%. Жодних написів або натяків на вміст.</div></div>
       <div class="faq-i" onclick="this.classList.toggle('open')"><div class="faq-q">Як швидко доставляють? <i class="ti ti-plus"></i></div><div class="faq-a">Відправляємо в день замовлення. НП — 1–2 дні по Україні.</div></div>
       <div class="faq-i" onclick="this.classList.toggle('open')"><div class="faq-q">Чи можу повернути? <i class="ti ti-plus"></i></div><div class="faq-a">Так, 14 днів. Товар в оригінальному пакуванні.</div></div>
@@ -541,292 +503,186 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--txt);o
 <div class="toast" id="toast"></div>
 
 <script>
-// ── HERO ITEMS (вбудовано) ──
-const HERO_ITEMS = [{"id":"SO2721","name":"Розкішні вагінальні кульки PILLOW TALK - Frisky Pink з кристалом, діаметр 3,2 см, вага 49-75гр","price":1259,"category":"for-her","sub":"Вагінальні кульки","photo":"http://sexopt.com.ua/content/images/40/so2721-99252058203677.jpg","qty":5,"notify":false},{"id":"SO2722","name":"Розкішні вагінальні кульки PILLOW TALK - Frisky Teal з кристалом, діаметр 3,2 см, вага 49-75 гр","price":1259,"category":"for-her","sub":"Вагінальні кульки","photo":"http://sexopt.com.ua/content/images/41/so2722-59831047442733.jpg","qty":5,"notify":false},{"id":"SO1893","name":"Фалоімітатор Real Body — Real Tony Flash, TPE, діаметр 3,5 см","price":919,"category":"for-her","sub":"Фалоімітатори","photo":"http://sexopt.com.ua/content/images/29/so1893-64343276468177.jpg","qty":5,"notify":false},{"id":"SO3815","name":"Мастурбатор-яйце Tenga Egg Shiny Pride Edition","price":429,"category":"for-him","sub":"Мастурбатори","photo":"https://sexopt.com.ua/content/images/44/so3815-92518269278206.jpg","qty":5,"notify":false},{"id":"ATH-001G","name":"Мастурбатор Tenga Air-Tech Ultra Size, вища аеростимуляція та всмоктувальний ефект","price":1729,"category":"for-him","sub":"Мастурбатори","photo":"https://sexopt.com.ua/content/images/5/ath-001g-47066738855868.jpg","qty":5,"notify":false},{"id":"SO1346","name":"Ерекційне кільце Dorcel Mastering з вібрацією, перезаряджається ","price":1639,"category":"for-him","sub":"Ерекційні кільця","photo":"https://sexopt.com.ua/content/images/49/so1346-37423081963979.jpg","qty":5,"notify":false},{"id":"SO3784","name":"Затискачі для сосків з пензликами Feral Feelings - Nipple clamps Tassels, срібло/чорний","price":699,"category":"for-couples","sub":"Аксесуари BDSM","photo":"http://sexopt.com.ua/content/images/42/zazhimy-dlya-soskov-s-kistochkami-feral-feelings-nipple-clamps-tassels-serebro-chernyy-27053234911144.jpg","qty":5,"notify":false},{"id":"SO3785","name":"Затискачі для сосків з пензликами Feral Feelings - Nipple clamps Tassels, срібло/білий","price":699,"category":"for-couples","sub":"Аксесуари BDSM","photo":"http://sexopt.com.ua/content/images/41/zazhimy-dlya-soskov-s-kistochkami-feral-feelings-nipple-clamps-tassels-serebro-belyy-92634483892348.jpg","qty":5,"notify":false},{"id":"SO3786","name":"Затискачі для сосків з ланцюжком Feral Feelings - Nipple clamps Classic, срібло/чорний","price":759,"category":"for-couples","sub":"Аксесуари BDSM","photo":"http://sexopt.com.ua/content/images/46/zazhimy-dlya-soskov-s-tsepochkoy-feral-feelings-nipple-clamps-classic-serebro-chernyy-89887421224883.jpg","qty":1,"notify":false},{"id":"SO1825","name":"Лубрикант на силіконовій основі JO PREMIUM — WARMING (60 мл)","price":1019,"category":"lubricants","sub":"Лубриканти на силіконовій основі","photo":"https://sexopt.com.ua/content/images/2/so1825-41253516859785.jpg","qty":5,"notify":false},{"id":"SO1897","name":"Лубрикант на водній основі Lubrix (50 мл) без парабенів","price":329,"category":"lubricants","sub":"Лубриканти на водній основі","photo":"http://sexopt.com.ua/content/images/33/so1897-12821411956460.jpg","qty":5,"notify":false},{"id":"SO1899","name":"Лубрикант на водній основі Lubrix (200 мл) без парабенів","price":529,"category":"lubricants","sub":"Лубриканти на водній основі","photo":"http://sexopt.com.ua/content/images/34/so1899-27415940699650.jpg","qty":5,"notify":false}];
+const HERO=[{"id":"SO1897","name":"Лубрикант на водній основі Lubrix (50 мл) без парабенів","price":329,"category":"lubricants","sub":"Лубриканти на водній основі","photo":"http://sexopt.com.ua/content/images/33/so1897-12821411956460.jpg","qty":5,"notify":false},{"id":"SO1899","name":"Лубрикант на водній основі Lubrix (200 мл) без парабенів","price":529,"category":"lubricants","sub":"Лубриканти на водній основі","photo":"http://sexopt.com.ua/content/images/34/so1899-27415940699650.jpg","qty":5,"notify":false},{"id":"PJ10050","name":"Універсальний лубрикант на силіконовій основі pjur Original 30 мл, 2в1: для сексу та масаж","price":449,"category":"lubricants","sub":"Лубриканти на силіконовій основі","photo":"https://sexopt.com.ua/content/images/33/pj10050-59417668060133.jpg","qty":5,"notify":false},{"id":"PJ10060","name":"Універсальний лубрикант на силіконовій основі pjur Original 100 мл, 2 в 1, для сексу та ма","price":829,"category":"lubricants","sub":"Лубриканти на силіконовій основі","photo":"https://sexopt.com.ua/content/images/34/pj10060-92449175891876.jpg","qty":5,"notify":false},{"id":"SO2721","name":"Розкішні вагінальні кульки PILLOW TALK - Frisky Pink з кристалом, діаметр 3,2 см, вага 49-","price":1259,"category":"for-her","sub":"Вагінальні кульки","photo":"http://sexopt.com.ua/content/images/40/so2721-99252058203677.jpg","qty":5,"notify":false},{"id":"SO2722","name":"Розкішні вагінальні кульки PILLOW TALK - Frisky Teal з кристалом, діаметр 3,2 см, вага 49-","price":1259,"category":"for-her","sub":"Вагінальні кульки","photo":"http://sexopt.com.ua/content/images/41/so2722-59831047442733.jpg","qty":5,"notify":false},{"id":"SO1893","name":"Фалоімітатор Real Body — Real Tony Flash, TPE, діаметр 3,5 см","price":919,"category":"for-her","sub":"Фалоімітатори","photo":"http://sexopt.com.ua/content/images/29/so1893-64343276468177.jpg","qty":5,"notify":false},{"id":"SO1894","name":"Фалоімітатор Real Body — Real Jayson Flesh, TPE, діаметр 4 см","price":1119,"category":"for-her","sub":"Фалоімітатори","photo":"http://sexopt.com.ua/content/images/30/so1894-98881987236578.jpg","qty":5,"notify":false},{"id":"SO3784","name":"Затискачі для сосків з пензликами Feral Feelings - Nipple clamps Tassels, срібло/чорний","price":699,"category":"for-couples","sub":"Аксесуари BDSM","photo":"http://sexopt.com.ua/content/images/42/zazhimy-dlya-soskov-s-kistochkami-feral-feelings-nipple-clamps-tassels-serebro-chernyy-27053234911144.jpg","qty":5,"notify":false}];
+const SCRIPT_URL='https://script.google.com/macros/s/AKfycbyHBabF915ipctX1GAT8gfzHaEuMdg_Elbvau9aJU3pkLNaBSVhmkB3F9FsD-ekm9dTbQ/exec';
+const CAT={'lubricants':'Лубриканти','for-her':'Для неї','for-him':'Для нього','for-couples':'Для пар','cosmetics':'Косметика','lingerie':'Білизна'};
+const PP=24;
 
-const PER_PAGE = 24;
-const CAT_NAMES = {'lubricants':'Лубриканти','for-her':'Для неї','for-him':'Для нього','for-couples':'Для пар','cosmetics':'Косметика','lingerie':'Білизна'};
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyHBabF915ipctX1GAT8gfzHaEuMdg_Elbvau9aJU3pkLNaBSVhmkB3F9FsD-ekm9dTbQ/exec';
+let CAT_DATA=[], cart=[], curCat='all', curSeg='all', curPage=1, curId=null, curQty=1;
+try{cart=JSON.parse(localStorage.getItem('s_cart')||'[]');}catch(e){}
 
-let CATALOG = [];
-let cart = [];
-try{ cart = JSON.parse(localStorage.getItem('senso_cart')||'[]'); }catch(e){ cart=[]; }
-let curCat='all', curSeg='all', curPage=1;
-let curProdId=null, curQty=1;
-
-// ── ЗАВАНТАЖЕННЯ КАТАЛОГУ ──
+// Завантаження каталогу
 async function loadCatalog(){
   try{
-    const r = await fetch('catalog.json');
-    CATALOG = await r.json();
+    const r=await fetch('catalog.json');
+    const raw=await r.json();
+    // Конвертуємо компактний формат
+    CAT_DATA=raw.map(x=>({
+      id:x.i, name:x.n, price:x.p, category:x.c,
+      sub:x.s, photo:x.ph, qty:x.q, notify:x.nt
+    }));
     initCounts();
     renderCatalog();
     renderHomeProds();
   }catch(e){
-    console.error('Помилка завантаження каталогу:', e);
-    document.getElementById('cat-lbl').textContent = 'Помилка завантаження';
+    console.error(e);
+    document.getElementById('cat-lbl').textContent='Помилка завантаження. Спробуйте оновити сторінку.';
+    document.getElementById('cat-grid').innerHTML='<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--muted)">Не вдалось завантажити товари</div>';
   }
 }
 
 function initCounts(){
-  const cats = ['lubricants','for-her','for-him','for-couples','cosmetics','lingerie'];
-  const all = CATALOG.filter(i=>!i.notify);
-  document.getElementById('n-all').textContent = all.length;
-  const catIds = {'lubricants':'lub','for-her':'her','for-him':'him','for-couples':'pair','cosmetics':'cosm','lingerie':'ling'};
-  cats.forEach(c=>{
-    const cnt = CATALOG.filter(i=>i.category===c&&!i.notify).length;
-    const sbEl = document.getElementById('n-'+catIds[c]);
-    if(sbEl) sbEl.textContent = cnt;
-    const hEl = document.getElementById('ch-'+catIds[c]);
-    if(hEl) hEl.textContent = cnt+' товарів';
+  const m=CAT_DATA.filter(i=>!i.notify);
+  document.getElementById('n-all').textContent=m.length;
+  const map={'lubricants':'lub','for-her':'her','for-him':'him','for-couples':'pair','cosmetics':'cosm','lingerie':'ling'};
+  Object.entries(map).forEach(([cat,id])=>{
+    const cnt=CAT_DATA.filter(i=>i.category===cat&&!i.notify).length;
+    const e1=document.getElementById('n-'+id); if(e1)e1.textContent=cnt;
+    const e2=document.getElementById('ch-'+id); if(e2)e2.textContent=cnt+' товарів';
   });
 }
 
-// ── HERO GRID ──
-function renderHeroGrid(){
-  const grid = document.getElementById('hero-grid');
-  if(!grid) return;
-  grid.innerHTML = HERO_ITEMS.slice(0,9).map(it=>`
-    <div class="hpc" onclick="openProduct('${it.id}')">
-      <div class="hpi">${it.photo?`<img src="${it.photo}" loading="lazy" onerror="this.style.display='none'"><div class="hpi-ph" style="display:none"><i class="ti ti-photo"></i></div>`:'<div class="hpi-ph"><i class="ti ti-photo"></i></div>'}</div>
-      <div class="hpc-info">
-        <div class="hpc-n">${it.name}</div>
-        <div class="hpc-p">${it.price?it.price.toLocaleString('uk-UA')+' грн':''}</div>
-      </div>
-    </div>`).join('');
-}
-
-// ── HOME PRODUCTS ──
 function renderHomeProds(){
-  const el = document.getElementById('home-prods');
-  if(!el) return;
-  const top = CATALOG.filter(i=>!i.notify&&i.photo&&i.price).slice(0,8);
-  el.innerHTML = top.map(renderCard).join('');
+  const el=document.getElementById('home-prods'); if(!el)return;
+  const top=CAT_DATA.filter(i=>!i.notify&&i.photo&&i.price).slice(0,8);
+  el.innerHTML=top.map(renderCard).join('');
 }
 
-// ── CATALOG ──
 function getFiltered(){
-  let items = [...CATALOG];
-  if(curCat!=='all') items=items.filter(i=>i.category===curCat);
-  if(curSeg==='budget') items=items.filter(i=>i.notify||(i.price&&i.price<=800));
-  else if(curSeg==='mid') items=items.filter(i=>i.notify||(i.price&&i.price>800&&i.price<=2500));
-  else if(curSeg==='premium') items=items.filter(i=>i.notify||(i.price&&i.price>2500));
+  let d=[...CAT_DATA];
+  if(curCat!=='all') d=d.filter(i=>i.category===curCat);
+  if(curSeg==='b') d=d.filter(i=>i.notify||(i.price&&i.price<=800));
+  else if(curSeg==='m') d=d.filter(i=>i.notify||(i.price&&i.price>800&&i.price<=2500));
+  else if(curSeg==='p') d=d.filter(i=>i.notify||(i.price&&i.price>2500));
   const mn=parseFloat(document.getElementById('pmin')?.value)||null;
   const mx=parseFloat(document.getElementById('pmax')?.value)||null;
-  if(mn) items=items.filter(i=>i.notify||(i.price&&i.price>=mn));
-  if(mx) items=items.filter(i=>i.notify||(i.price&&i.price<=mx));
+  if(mn) d=d.filter(i=>i.notify||(i.price&&i.price>=mn));
+  if(mx) d=d.filter(i=>i.notify||(i.price&&i.price<=mx));
   const q=(document.getElementById('search-q')?.value||'').toLowerCase().trim();
-  if(q) items=items.filter(i=>i.name.toLowerCase().includes(q));
-  const s=document.getElementById('sort-sel')?.value||'d';
-  if(s==='pa') items.sort((a,b)=>(a.price||0)-(b.price||0));
-  else if(s==='pd') items.sort((a,b)=>(b.price||0)-(a.price||0));
-  else if(s==='na') items.sort((a,b)=>a.name.localeCompare(b.name,'uk'));
-  return items;
+  if(q) d=d.filter(i=>i.name.toLowerCase().includes(q));
+  const s=document.getElementById('srt')?.value||'d';
+  if(s==='pa') d.sort((a,b)=>(a.price||0)-(b.price||0));
+  else if(s==='pd') d.sort((a,b)=>(b.price||0)-(a.price||0));
+  else if(s==='na') d.sort((a,b)=>a.name.localeCompare(b.name,'uk'));
+  return d;
 }
 
 function renderCatalog(){
-  const f=getFiltered(), tot=f.length, pages=Math.ceil(tot/PER_PAGE);
-  if(curPage>pages) curPage=1;
-  const sl=f.slice((curPage-1)*PER_PAGE, curPage*PER_PAGE);
-  const lbl=document.getElementById('cat-lbl');
-  if(lbl) lbl.textContent=tot+' товарів';
-  const grid=document.getElementById('cat-grid');
-  if(!grid) return;
-  grid.innerHTML=sl.length?sl.map((it,i)=>renderCard(it,i)).join(''):
+  const f=getFiltered(),tot=f.length,pages=Math.ceil(tot/PP);
+  if(curPage>pages)curPage=1;
+  const sl=f.slice((curPage-1)*PP,curPage*PP);
+  const lbl=document.getElementById('cat-lbl'); if(lbl)lbl.textContent=tot+' товарів';
+  const g=document.getElementById('cat-grid'); if(!g)return;
+  g.innerHTML=sl.length?sl.map(renderCard).join(''):
     '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--muted)"><i class="ti ti-search" style="font-size:40px;display:block;margin-bottom:1rem;"></i>Товарів не знайдено</div>';
   renderPgn(pages);
 }
 
-function renderCard(item, idx=0){
-  const lux=item.price&&item.price>3000;
-  const badge=item.notify?'<div class="pbadge soon">НЕЗАБАРОМ</div>':lux?'<div class="pbadge lux">ЛЮКС</div>':'';
-  const img=item.photo?
-    `<img src="${item.photo}" alt="" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
-     <div class="pi-ph" style="display:none"><i class="ti ti-photo"></i></div>`:
+function renderCard(it,idx){
+  const lux=it.price&&it.price>3000;
+  const badge=it.notify?'<div class="pbadge soon">НЕЗАБАРОМ</div>':lux?'<div class="pbadge lux">ЛЮКС</div>':'';
+  const img=it.photo?
+    `<img src="${it.photo}" alt="" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><div class="pi-ph" style="display:none"><i class="ti ti-photo"></i></div>`:
     '<div class="pi-ph"><i class="ti ti-photo"></i></div>';
-  const btn=item.notify?
-    '<button class="padd soon" onclick="event.stopPropagation()">ПОВІДОМИТИ ПРО НАЯВНІСТЬ</button>':
-    `<button class="padd" onclick="event.stopPropagation();addToCart('${item.id}','${(item.name||'').replace(/'/g,"\'").replace(/"/g,'').substring(0,60)}',${item.price},'${item.photo||''}','${item.id}')">В КОШИК</button>`;
-  const price=item.notify?'<div class="pnotify">Очікується надходження</div>':
-    `<div class="pprice">${(item.price||0).toLocaleString('uk-UA')} грн</div>`;
-  return `<div class="pc" onclick="openProduct('${item.id}')">
+  const btn=it.notify?
+    '<button class="padd soon" onclick="event.stopPropagation()">ПОВІДОМИТИ</button>':
+    `<button class="padd" onclick="event.stopPropagation();addToCart(${JSON.stringify(it.id)},${JSON.stringify(it.name.substring(0,60))},${it.price},${JSON.stringify(it.photo||'')},${JSON.stringify(it.id)})">В КОШИК</button>`;
+  const price=it.notify?'<div class="pnotify">Очікується надходження</div>':
+    `<div class="pprice">${(it.price||0).toLocaleString('uk-UA')} грн</div>`;
+  return `<div class="pc" onclick="openProduct(${JSON.stringify(it.id)})">
     <div class="pi">${badge}${img}<div class="pov">${btn}</div></div>
-    <div class="pinfo"><div class="psub">${item.sub||CAT_NAMES[item.category]||''}</div>
-    <div class="pname">${item.name||''}</div>${price}</div>
-  </div>`;
+    <div class="pinfo"><div class="psub">${it.sub||CAT[it.category]||''}</div>
+    <div class="pname">${it.name}</div>${price}</div></div>`;
 }
 
 function renderPgn(pages){
-  const pgn=document.getElementById('pgn');
-  if(!pgn||pages<=1){if(pgn)pgn.innerHTML='';return;}
+  const p=document.getElementById('pgn'); if(!p||pages<=1){if(p)p.innerHTML='';return;}
   let h=`<button class="pgb" onclick="goPage(${curPage-1})" ${curPage===1?'disabled':''}>‹</button>`;
-  for(let p=1;p<=pages;p++){
-    if(p===1||p===pages||Math.abs(p-curPage)<=1)
-      h+=`<button class="pgb${p===curPage?' on':''}" onclick="goPage(${p})">${p}</button>`;
-    else if(Math.abs(p-curPage)===2) h+=`<span style="color:var(--muted);padding:0 3px">…</span>`;
+  for(let i=1;i<=pages;i++){
+    if(i===1||i===pages||Math.abs(i-curPage)<=1)
+      h+=`<button class="pgb${i===curPage?' on':''}" onclick="goPage(${i})">${i}</button>`;
+    else if(Math.abs(i-curPage)===2) h+=`<span style="color:var(--muted);padding:0 3px">…</span>`;
   }
   h+=`<button class="pgb" onclick="goPage(${curPage+1})" ${curPage===pages?'disabled':''}>›</button>`;
-  pgn.innerHTML=h;
+  p.innerHTML=h;
 }
 
-function goPage(p){const pages=Math.ceil(getFiltered().length/PER_PAGE);if(p<1||p>pages)return;curPage=p;renderCatalog();document.querySelector('.cat-main').scrollIntoView({behavior:'smooth'});}
+function goPage(p){const pages=Math.ceil(getFiltered().length/PP);if(p<1||p>pages)return;curPage=p;renderCatalog();document.querySelector('.cat-main').scrollIntoView({behavior:'smooth'});}
 function setCat(c,el){curCat=c;curPage=1;document.querySelectorAll('.sb-b[onclick^="setCat"]').forEach(b=>b.classList.remove('on'));if(el)el.classList.add('on');renderCatalog();}
 function setSeg(s,el){curSeg=s;curPage=1;document.querySelectorAll('.sb-b[onclick^="setSeg"]').forEach(b=>b.classList.remove('on'));if(el)el.classList.add('on');renderCatalog();}
-function filterCat(cat){
-  curCat=cat;curPage=1;showPage('catalog');
-  document.querySelectorAll('.sb-b[onclick^="setCat"]').forEach(b=>b.classList.remove('on'));
-  setTimeout(()=>{
-    const btn=document.querySelector(`.sb-b[onclick="setCat('${cat}',this)"]`);
-    if(btn)btn.classList.add('on');
-    renderCatalog();
-  },50);
-}
+function filterCat(cat){curCat=cat;curPage=1;showPage('catalog');document.querySelectorAll('.sb-b[onclick^="setCat"]').forEach(b=>b.classList.remove('on'));setTimeout(()=>{const b=document.querySelector(`.sb-b[onclick="setCat('${cat}',this)"]`);if(b)b.classList.add('on');renderCatalog();},50);}
 
-// ── СТОРІНКА ТОВАРУ ──
+// СТОРІНКА ТОВАРУ
 function openProduct(id){
-  const item = CATALOG.find(i=>i.id===id) || HERO_ITEMS.find(i=>i.id===id);
-  if(!item) return;
-  if(item.notify){showToast('Товар очікується. Натисніть "Повідомити"');return;}
-
-  curProdId=id; curQty=1;
-
-  const imgEl=document.getElementById('prod-img');
-  if(imgEl) imgEl.src=item.photo||'';
-  const nameEl=document.getElementById('prod-name');
-  if(nameEl) nameEl.textContent=item.name||'';
-  const catEl=document.getElementById('prod-cat');
-  if(catEl) catEl.textContent=(item.sub||CAT_NAMES[item.category]||'').toUpperCase();
-  const artEl=document.getElementById('prod-art');
-  if(artEl) artEl.textContent='Артикул: '+item.id;
-  const priceEl=document.getElementById('prod-price');
-  if(priceEl) priceEl.textContent=(item.price||0).toLocaleString('uk-UA')+' грн';
-  const qtyEl=document.getElementById('prod-qty');
-  if(qtyEl) qtyEl.value=1;
-  const atcEl=document.getElementById('prod-atc');
-  if(atcEl){atcEl.classList.remove('done');atcEl.innerHTML='В КОШИК <i class="ti ti-shopping-bag" style="font-size:12px"></i>';}
-
-  // Мініатюри
-  const thumbs=document.getElementById('prod-thumbs');
-  if(thumbs&&item.photo) thumbs.innerHTML=`<div class="thumb on"><img src="${item.photo}"></div>`;
-
-  // Опис
-  const desc=document.getElementById('tab-desc');
-  if(desc) desc.innerHTML=`<p style="color:var(--muted);font-size:13px;line-height:2;">Преміальний товар від перевіреного виробника. Безпечні матеріали. Сертифіковано МОЗ України.</p>`;
-
-  // Характеристики
-  const chars=document.getElementById('tab-chars');
-  if(chars) chars.innerHTML=`
-    <div class="spec-row"><span class="spec-l">Артикул</span><span class="spec-v">${item.id}</span></div>
-    <div class="spec-row"><span class="spec-l">Категорія</span><span class="spec-v">${CAT_NAMES[item.category]||''}</span></div>
-    <div class="spec-row"><span class="spec-l">Підкатегорія</span><span class="spec-v">${item.sub||'—'}</span></div>
-    <div class="spec-row"><span class="spec-l">Наявність</span><span class="spec-v">${item.qty>=5?'5+ шт':(item.qty||0)+' шт'}</span></div>
-    <div class="spec-row"><span class="spec-l">Сертифікація</span><span class="spec-v">МОЗ України</span></div>`;
-
-  // Відгуки (приклад)
-  const rev=document.getElementById('tab-reviews');
-  if(rev) rev.innerHTML=`
-    <div class="rev-item">
-      <div class="rev-stars">★★★★★</div>
-      <div class="rev-meta">Анна К. · 3 дні тому</div>
-      <div class="rev-text">Чудова якість! Швидка доставка, дискретна упаковка. Дуже задоволена.</div>
-    </div>
-    <div class="rev-item">
-      <div class="rev-stars">★★★★★</div>
-      <div class="rev-meta">Юлія М. · 1 тиждень тому</div>
-      <div class="rev-text">Замовляла вперше — все прийшло швидко. Упаковка нейтральна. Рекомендую!</div>
-    </div>`;
-
-  // Допродаж
-  const up=CATALOG.filter(i=>i.category===item.category&&i.id!==id&&!i.notify&&i.price&&i.photo).slice(0,4);
-  const upEl=document.getElementById('upsell-grid');
-  if(upEl) upEl.innerHTML=up.map(renderCard).join('');
-
+  const it=CAT_DATA.find(i=>i.id===id)||HERO.find(i=>i.id===id);
+  if(!it||it.notify){showToast('Товар очікується');return;}
+  curId=id;curQty=1;
+  const set=(eid,val)=>{const e=document.getElementById(eid);if(e)e[typeof val==='string'&&val.includes('<')?'innerHTML':'textContent']=val;};
+  const imgEl=document.getElementById('prod-img'); if(imgEl)imgEl.src=it.photo||'';
+  set('prod-cat',(it.sub||CAT[it.category]||'').toUpperCase());
+  set('prod-name',it.name);
+  set('prod-art','Артикул: '+it.id);
+  set('prod-price',(it.price||0).toLocaleString('uk-UA')+' грн');
+  const qEl=document.getElementById('prod-qty'); if(qEl)qEl.value=1;
+  const aEl=document.getElementById('prod-atc'); if(aEl){aEl.classList.remove('done');aEl.innerHTML='В КОШИК <i class="ti ti-shopping-bag" style="font-size:12px"></i>';}
+  const th=document.getElementById('prod-thumbs'); if(th&&it.photo)th.innerHTML=`<div class="thumb on"><img src="${it.photo}"></div>`;
+  set('tab-desc','<p style="color:var(--muted);font-size:13px;line-height:2;">Преміальний товар від перевіреного виробника. Безпечні матеріали, гіпоалергенний склад. Сертифіковано МОЗ України.</p>');
+  const ch=document.getElementById('tab-chars');
+  if(ch)ch.innerHTML=`<div class="spec-r"><span class="spec-l">Артикул</span><span class="spec-v">${it.id}</span></div><div class="spec-r"><span class="spec-l">Категорія</span><span class="spec-v">${CAT[it.category]||''}</span></div><div class="spec-r"><span class="spec-l">Підкатегорія</span><span class="spec-v">${it.sub||'—'}</span></div><div class="spec-r"><span class="spec-l">Наявність</span><span class="spec-v">${it.qty>=5?'5+ шт':(it.qty||0)+' шт'}</span></div><div class="spec-r"><span class="spec-l">Сертифікація</span><span class="spec-v">МОЗ України</span></div>`;
+  const rv=document.getElementById('tab-rev');
+  if(rv)rv.innerHTML='<div class="rev-i"><div class="rev-stars">★★★★★</div><div class="rev-meta">Анна К. · 3 дні тому</div><div class="rev-text">Чудова якість! Швидка доставка, дискретна упаковка.</div></div><div class="rev-i"><div class="rev-stars">★★★★★</div><div class="rev-meta">Юлія М. · 1 тиждень тому</div><div class="rev-text">Замовляла вперше — все прийшло швидко. Рекомендую!</div></div>';
+  const up=CAT_DATA.filter(i=>i.category===it.category&&i.id!==id&&!i.notify&&i.price&&i.photo).slice(0,4);
+  const ug=document.getElementById('upsell-g'); if(ug)ug.innerHTML=up.map(renderCard).join('');
   showPage('product');
-  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function chQty(d){curQty=Math.max(1,Math.min(5,(curQty||1)+d));const el=document.getElementById('prod-qty');if(el)el.value=curQty;}
+function chQty(d){curQty=Math.max(1,Math.min(5,(curQty||1)+d));const e=document.getElementById('prod-qty');if(e)e.value=curQty;}
 function addCurrent(){
-  const item=CATALOG.find(i=>i.id===curProdId)||HERO_ITEMS.find(i=>i.id===curProdId);
-  if(!item)return;
-  for(let i=0;i<curQty;i++){const ex=cart.find(c=>c.id===item.id);if(ex)ex.qty++;else cart.push({id:item.id,name:item.name,price:item.price,photo:item.photo||'',art:item.id,qty:1});}
+  const it=CAT_DATA.find(i=>i.id===curId)||HERO.find(i=>i.id===curId);
+  if(!it)return;
+  for(let i=0;i<curQty;i++){const ex=cart.find(c=>c.id===it.id);if(ex)ex.qty++;else cart.push({id:it.id,name:it.name,price:it.price,photo:it.photo||'',art:it.id,qty:1});}
   saveCart();updateCartUI();
-  const btn=document.getElementById('prod-atc');
-  if(btn){btn.classList.add('done');btn.innerHTML='✓ В КОШИКУ';}
-  showToast('✓ Додано до кошика');
-  setTimeout(()=>openCart(),500);
+  const b=document.getElementById('prod-atc');if(b){b.classList.add('done');b.innerHTML='✓ В КОШИКУ';}
+  showToast('✓ Додано до кошика');setTimeout(()=>openCart(),500);
 }
+function showTab(id,el){document.querySelectorAll('.ptab').forEach(t=>t.classList.remove('on'));document.querySelectorAll('.tab-b').forEach(t=>t.classList.remove('on'));el.classList.add('on');const tb=document.getElementById('tab-'+id);if(tb)tb.classList.add('on');}
 
-function showTab(id,el){
-  document.querySelectorAll('.ptab').forEach(t=>t.classList.remove('on'));
-  document.querySelectorAll('.tab-b').forEach(t=>t.classList.remove('on'));
-  el.classList.add('on');
-  const tb=document.getElementById('tab-'+id);
-  if(tb)tb.classList.add('on');
-}
-
-// ── КОШИК ──
-function addToCart(id,name,price,photo,art){
-  const ex=cart.find(i=>i.id===id);
-  if(ex)ex.qty++;else cart.push({id,name,price,photo,art,qty:1});
-  saveCart();updateCartUI();showToast('✓ Додано до кошика');
-  setTimeout(()=>openCart(),350);
-}
+// КОШИК
+function addToCart(id,name,price,photo,art){const ex=cart.find(i=>i.id===id);if(ex)ex.qty++;else cart.push({id,name,price,photo,art,qty:1});saveCart();updateCartUI();showToast('✓ Додано до кошика');setTimeout(()=>openCart(),350);}
 function removeFromCart(id){cart=cart.filter(i=>i.id!==id);saveCart();updateCartUI();}
-function saveCart(){try{localStorage.setItem('senso_cart',JSON.stringify(cart));}catch(e){}}
+function saveCart(){try{localStorage.setItem('s_cart',JSON.stringify(cart));}catch(e){}}
 function updateCartUI(){
   const tot=cart.reduce((s,i)=>s+i.qty,0);
-  const badge=document.getElementById('cbadge');if(badge)badge.textContent=tot;
+  const b=document.getElementById('cbadge');if(b)b.textContent=tot;
   const list=document.getElementById('cd-items');
-  const footer=document.getElementById('cd-f');
+  const f=document.getElementById('cd-f');
   if(!list)return;
-  if(!cart.length){
-    list.innerHTML='<div class="ce"><i class="ti ti-shopping-bag"></i><p style="font-size:11px;letter-spacing:1px;margin-top:.5rem;">КОШИК ПОРОЖНІЙ</p></div>';
-    if(footer)footer.style.display='none';return;
-  }
-  if(footer)footer.style.display='block';
-  list.innerHTML=cart.map(it=>`
-    <div class="cdi">
-      <div class="cdi-img"><img src="${it.photo}" onerror="this.style.display='none'"></div>
-      <div style="flex:1">
-        <div class="cdi-art">${it.art}</div>
-        <div class="cdi-name">${it.name}</div>
-        <div class="cdi-price">${(it.price*it.qty).toLocaleString('uk-UA')} грн</div>
-        <div class="cdi-qty">К-сть: ${it.qty}</div>
-      </div>
-      <button class="cdi-rm" onclick="removeFromCart('${it.id}')"><i class="ti ti-x"></i></button>
-    </div>`).join('');
-  const sum=cart.reduce((s,i)=>s+i.price*i.qty,0);
-  const totEl=document.getElementById('cd-total');if(totEl)totEl.textContent=sum.toLocaleString('uk-UA')+' грн';
+  if(!cart.length){list.innerHTML='<div class="ce"><i class="ti ti-shopping-bag"></i><p style="font-size:11px;letter-spacing:1px;margin-top:.5rem;">КОШИК ПОРОЖНІЙ</p></div>';if(f)f.style.display='none';return;}
+  if(f)f.style.display='block';
+  list.innerHTML=cart.map(it=>`<div class="cdi"><div class="cdi-img"><img src="${it.photo}" onerror="this.style.display='none'"></div><div style="flex:1"><div class="cdi-art">${it.art}</div><div class="cdi-n">${it.name}</div><div class="cdi-p">${(it.price*it.qty).toLocaleString('uk-UA')} грн</div><div class="cdi-q">К-сть: ${it.qty}</div></div><button class="cdi-rm" onclick="removeFromCart(${JSON.stringify(it.id)})"><i class="ti ti-x"></i></button></div>`).join('');
+  const s=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const te=document.getElementById('cd-total');if(te)te.textContent=s.toLocaleString('uk-UA')+' грн';
 }
 function openCart(){document.getElementById('cd').classList.add('on');document.getElementById('ov').classList.add('on');}
 function closeCart(){document.getElementById('cd').classList.remove('on');document.getElementById('ov').classList.remove('on');}
 
-// ── СТОРІНКИ ──
-function showPage(name){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
-  const pg=document.getElementById('page-'+name);if(pg)pg.classList.add('on');
-  window.scrollTo({top:0,behavior:'smooth'});
+// HERO GRID
+function renderHeroGrid(){
+  const g=document.getElementById('hero-grid');if(!g)return;
+  g.innerHTML=HERO.slice(0,9).map(it=>`<div class="hpc" onclick="openProduct(${JSON.stringify(it.id)})"><div class="hpi">${it.photo?`<img src="${it.photo}" loading="lazy" onerror="this.style.display='none'"><div class="hpi-ph" style="display:none"><i class="ti ti-photo"></i></div>`:'<div class="hpi-ph"><i class="ti ti-photo"></i></div>'}</div><div class="hpc-info"><div class="hpc-s">${it.sub||''}</div><div class="hpc-n">${it.name}</div><div class="hpc-p">${it.price?(it.price.toLocaleString('uk-UA')+' грн'):''}</div></div></div>`).join('');
 }
 
-// ── TOAST ──
-function showToast(msg){const t=document.getElementById('toast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2300);}
+function showPage(n){document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));const pg=document.getElementById('page-'+n);if(pg)pg.classList.add('on');window.scrollTo({top:0,behavior:'smooth'});}
+function showToast(m){const t=document.getElementById('toast');if(!t)return;t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2300);}
 
-// ── REVEAL ──
-function initReveal(){
-  const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');});},{threshold:0.1});
-  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-}
-
-// ── INIT ──
 function init(){
   renderHeroGrid();
   updateCartUI();
-  initReveal();
+  new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');});},{threshold:0.1}).observe && document.querySelectorAll('.reveal').forEach(el=>new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');});},{threshold:0.1}).observe(el));
   loadCatalog();
 }
 
-if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
+document.readyState==='loading'?document.addEventListener('DOMContentLoaded',init):init();
 </script>
 </body>
 </html>
