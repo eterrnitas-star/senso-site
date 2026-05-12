@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SENSO — преміальний інтернет-магазин товарів для дорослих. Дискретна доставка по всій Україні. Сертифіковано МОЗ України.">
+  <title>SENSO — Магазин для дорослих</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{--acc:#c0392b;--acc2:#e74c3c;--bg:#080505;--bg2:#0f0808;--bg3:#160a0a;--txt:#f0e8e8;--muted:#7a6060;--brd:rgba(192,57,43,0.12);--green:#27ae60;--gold:#c9a96e;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--txt);overflow-x:hidden;}
+
+    /* ── NAV ── */
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:rgba(8,5,5,0.97);border-bottom:1px solid var(--brd);position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);}
+    .logo{font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:6px;font-weight:300;text-decoration:none;color:var(--txt);}
+    .logo em{color:var(--acc);font-style:normal;}
+    .nav-links{display:flex;gap:1.5rem;font-size:11px;letter-spacing:1.5px;}
+    .nav-links a{color:var(--muted);text-decoration:none;transition:color .2s;cursor:pointer;}
+    .nav-links a:hover{color:var(--acc);}
+    .nav-r{display:flex;gap:1rem;align-items:center;}
+    .nav-r i{font-size:18px;color:var(--muted);cursor:pointer;transition:color .2s;}
+    .nav-r i:hover{color:var(--acc);}
+    .cart-wrap{position:relative;cursor:pointer;}
+    .cart-badge{position:absolute;top:-5px;right:-6px;background:var(--acc);color:#fff;font-size:9px;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:500;}
+
+    /* ── PAGE SYSTEM ── */
+    .page{display:none;}
+    .page.active{display:block;}
+
+    /* ══════════════════════════════
+       ГОЛОВНА СТОРІНКА
+    ══════════════════════════════ */
+    .hero{display:grid;grid-template-columns:1fr 1fr;min-height:88vh;}
+    .hero-left{background:linear-gradient(135deg,#1a0a10,#2d0f1e);padding:5rem 3rem;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;}
+    .hero-left::before{content:'';position:absolute;top:-60px;left:-60px;width:350px;height:350px;background:radial-gradient(circle,rgba(192,57,43,0.12),transparent 70%);pointer-events:none;}
+    .hero-tag{font-size:10px;letter-spacing:4px;color:var(--acc);margin-bottom:1.5rem;opacity:0;animation:fadeUp .7s .1s forwards;}
+    .hero-title{font-family:'Cormorant Garamond',serif;font-size:58px;font-weight:300;line-height:1.1;margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s .25s forwards;}
+    .hero-title strong{color:var(--acc);font-style:italic;display:block;}
+    .hero-desc{font-size:13px;color:var(--muted);line-height:2;max-width:340px;margin-bottom:2.5rem;opacity:0;animation:fadeUp .7s .4s forwards;}
+    .hero-btns{display:flex;gap:12px;opacity:0;animation:fadeUp .7s .55s forwards;}
+    .btn{display:inline-flex;align-items:center;gap:8px;background:var(--acc);color:#fff;padding:13px 26px;font-size:10px;letter-spacing:2.5px;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;transition:background .2s;}
+    .btn:hover{background:var(--acc2);}
+    .btn-outline{background:transparent;border:1px solid rgba(255,255,255,0.15);color:var(--txt);padding:13px 26px;font-size:10px;letter-spacing:2.5px;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .2s;}
+    .btn-outline:hover{border-color:var(--acc);color:var(--acc);}
+    .hero-right{background:linear-gradient(135deg,#1f0d17,#2a1020);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+    .hero-right::before{content:'';position:absolute;width:300px;height:300px;border-radius:50%;border:1px solid rgba(192,57,43,0.1);animation:pulse 3s ease-in-out infinite;}
+    .hero-right::after{content:'';position:absolute;width:200px;height:200px;border-radius:50%;border:1px solid rgba(192,57,43,0.15);animation:pulse 3s 1s ease-in-out infinite;}
+    .hero-frame{width:180px;height:240px;border:1px solid rgba(192,57,43,0.25);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;z-index:1;opacity:0;animation:fadeIn 1s .8s forwards;}
+    .hero-frame i{font-size:48px;color:var(--acc);opacity:0.5;}
+    .hero-frame span{font-size:9px;letter-spacing:4px;color:var(--muted);}
+
+    .strip{background:#8b1a1a;padding:.75rem 2rem;display:flex;justify-content:center;gap:4rem;font-size:10px;letter-spacing:2px;color:rgba(240,232,232,0.75);}
+    .strip span{display:flex;align-items:center;gap:7px;}
+
+    /* ── КАТЕГОРІЇ ── */
+    .section{padding:4rem 2rem;}
+    .sec-hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2rem;}
+    .sec-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;}
+    .sec-title em{color:var(--acc);font-style:italic;}
+    .sec-link{font-size:10px;letter-spacing:2px;color:var(--acc);cursor:pointer;transition:opacity .2s;}
+    .sec-link:hover{opacity:.7;}
+
+    .cats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(192,57,43,0.1);}
+    .cat-card{background:var(--bg2);padding:2.5rem 1rem;text-align:center;cursor:pointer;transition:background .3s;position:relative;overflow:hidden;}
+    .cat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--acc);transform:scaleX(0);transform-origin:left;transition:transform .4s;}
+    .cat-card:hover{background:var(--bg3);}
+    .cat-card:hover::after{transform:scaleX(1);}
+    .cat-card i{font-size:30px;color:var(--acc);display:block;margin-bottom:.9rem;transition:transform .3s;}
+    .cat-card:hover i{transform:scale(1.1);}
+    .cat-name{font-size:11px;letter-spacing:2px;color:var(--txt);margin-bottom:4px;}
+    .cat-count{font-size:10px;color:var(--muted);}
+
+    /* ── ТОВАРИ ── */
+    .products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(192,57,43,0.08);}
+    .prod-card{background:var(--bg2);cursor:pointer;transition:border-color .25s;position:relative;overflow:hidden;}
+    .prod-card:hover{background:var(--bg3);}
+    .prod-img{height:210px;background:var(--bg3);position:relative;overflow:hidden;}
+    .prod-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+    .prod-card:hover .prod-img img{transform:scale(1.06);}
+    .prod-img-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
+    .prod-img-ph i{font-size:40px;color:var(--acc);opacity:0.25;}
+    .prod-badge{position:absolute;top:8px;left:8px;font-size:9px;padding:2px 7px;letter-spacing:1.5px;z-index:2;}
+    .prod-badge.hit{background:var(--acc);color:#fff;}
+    .prod-badge.lux{background:var(--gold);color:#000;}
+    .prod-badge.new{background:transparent;border:1px solid var(--acc);color:var(--acc);}
+    .prod-badge.soon{background:#111;border:1px solid #333;color:#555;}
+    .prod-overlay{position:absolute;bottom:0;left:0;right:0;transform:translateY(100%);transition:transform .3s;z-index:3;padding:8px;}
+    .prod-card:hover .prod-overlay{transform:translateY(0);}
+    .add-btn{width:100%;background:var(--acc);color:#fff;font-size:9px;letter-spacing:2px;padding:9px;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;transition:background .2s;}
+    .add-btn:hover{background:var(--acc2);}
+    .add-btn.notify{background:#1a1a1a;border:1px solid #2a2a2a;color:#555;}
+    .prod-info{padding:.8rem;}
+    .prod-sub{font-size:9px;letter-spacing:1.5px;color:var(--muted);margin-bottom:3px;}
+    .prod-name{font-size:11px;color:var(--txt);line-height:1.4;margin-bottom:.4rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+    .prod-price{font-size:14px;font-weight:500;color:var(--txt);}
+    .prod-notify{font-size:10px;color:#444;font-style:italic;}
+
+    /* ── СТОРІНКА КАТАЛОГУ ── */
+    .catalog-layout{display:grid;grid-template-columns:210px 1fr;}
+    .sidebar{background:var(--bg2);border-right:1px solid var(--brd);padding:1.5rem;position:sticky;top:57px;height:calc(100vh - 57px);overflow-y:auto;}
+    .sidebar::-webkit-scrollbar{width:2px;}
+    .sidebar::-webkit-scrollbar-thumb{background:var(--acc);}
+    .sb-section{margin-bottom:1.5rem;}
+    .sb-title{font-size:9px;letter-spacing:3px;color:var(--acc);margin-bottom:.8rem;font-weight:400;}
+    .sb-btn{display:flex;align-items:center;justify-content:space-between;width:100%;background:transparent;border:none;padding:.45rem .5rem;font-size:11px;letter-spacing:.8px;color:var(--muted);cursor:pointer;border-radius:2px;transition:all .2s;text-align:left;font-family:'Montserrat',sans-serif;}
+    .sb-btn:hover{background:var(--bg3);color:var(--txt);}
+    .sb-btn.active{background:rgba(192,57,43,0.1);color:var(--acc);}
+    .sb-count{font-size:10px;color:var(--muted);background:var(--bg3);padding:1px 5px;border-radius:8px;}
+    .sb-btn.active .sb-count{background:rgba(192,57,43,0.2);color:var(--acc);}
+    .price-inputs{display:flex;gap:6px;align-items:center;}
+    .price-inputs input{background:var(--bg3);border:1px solid var(--brd);color:var(--txt);padding:5px 7px;font-size:11px;width:68px;font-family:'Montserrat',sans-serif;border-radius:2px;outline:none;}
+    .price-inputs input:focus{border-color:var(--acc);}
+    .apply-btn{width:100%;background:var(--acc);color:#fff;border:none;padding:7px;font-size:10px;letter-spacing:2px;cursor:pointer;margin-top:.5rem;font-family:'Montserrat',sans-serif;border-radius:2px;}
+    .sort-sel{width:100%;background:var(--bg3);border:1px solid var(--brd);color:var(--txt);padding:7px 8px;font-size:11px;font-family:'Montserrat',sans-serif;border-radius:2px;cursor:pointer;outline:none;}
+
+    .catalog-main{padding:1.5rem;}
+    .search-bar{display:flex;gap:10px;margin-bottom:1.5rem;}
+    .search-input{flex:1;background:var(--bg3);border:1px solid var(--brd);color:var(--txt);padding:9px 12px;font-size:12px;font-family:'Montserrat',sans-serif;border-radius:2px;outline:none;}
+    .search-input::placeholder{color:var(--muted);}
+    .search-input:focus{border-color:var(--acc);}
+    .results-count{font-size:11px;color:var(--muted);letter-spacing:1px;align-self:center;}
+
+    /* ── СТОРІНКА ТОВАРУ ── */
+    .product-layout{display:grid;grid-template-columns:1fr 1fr;}
+    .product-gallery{background:var(--bg2);border-right:1px solid var(--brd);}
+    .main-photo{height:480px;overflow:hidden;position:relative;}
+    .main-photo img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+    .main-photo:hover img{transform:scale(1.04);}
+    .photo-thumbs{display:flex;gap:8px;padding:10px;background:var(--bg3);}
+    .thumb{width:60px;height:60px;border:1px solid var(--brd);cursor:pointer;overflow:hidden;flex-shrink:0;transition:border-color .2s;}
+    .thumb:hover,.thumb.active{border-color:var(--acc);}
+    .thumb img{width:100%;height:100%;object-fit:cover;}
+    .product-info{padding:2rem;display:flex;flex-direction:column;gap:1.2rem;}
+    .prod-category{font-size:10px;letter-spacing:3px;color:var(--acc);}
+    .prod-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;line-height:1.25;}
+    .prod-article{font-size:10px;letter-spacing:2px;color:var(--muted);}
+    .price-block{background:var(--bg2);border:1px solid var(--brd);padding:1.2rem;}
+    .price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:.4rem;}
+    .price-main{font-size:28px;font-weight:500;}
+    .qty-row{display:flex;gap:10px;margin-top:.8rem;align-items:center;}
+    .qty-ctrl{display:flex;align-items:center;border:1px solid var(--brd);}
+    .qty-btn{background:var(--bg3);border:none;color:var(--txt);width:34px;height:38px;cursor:pointer;font-size:16px;font-family:'Montserrat',sans-serif;transition:background .2s;}
+    .qty-btn:hover{background:var(--acc);}
+    .qty-val{width:40px;height:38px;text-align:center;background:var(--bg2);border:none;color:var(--txt);font-size:14px;font-family:'Montserrat',sans-serif;}
+    .add-to-cart{flex:1;background:var(--acc);color:#fff;border:none;padding:11px;font-size:10px;letter-spacing:2px;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .2s;}
+    .add-to-cart:hover{background:var(--acc2);}
+    .add-to-cart.added{background:var(--green);}
+    .wish-btn{width:40px;height:40px;background:transparent;border:1px solid var(--brd);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+    .wish-btn:hover,.wish-btn.active{border-color:var(--acc);color:var(--acc);}
+    .deliv-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+    .deliv-item{display:flex;align-items:flex-start;gap:8px;background:var(--bg3);padding:.7rem;}
+    .deliv-item i{font-size:15px;color:var(--acc);flex-shrink:0;margin-top:1px;}
+    .deliv-text strong{color:var(--txt);font-size:11px;display:block;margin-bottom:1px;}
+    .deliv-text span{font-size:10px;color:var(--muted);}
+    .cert-badge{background:rgba(39,174,96,.08);border:1px solid rgba(39,174,96,.2);padding:.7rem 1rem;display:flex;align-items:center;gap:8px;font-size:10px;color:var(--green);letter-spacing:1px;}
+    .prod-tabs{border-bottom:1px solid var(--brd);display:flex;margin-top:.5rem;}
+    .prod-tab{padding:.6rem 1rem;font-size:10px;letter-spacing:1.5px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;margin-bottom:-1px;}
+    .prod-tab:hover{color:var(--txt);}
+    .prod-tab.active{color:var(--acc);border-bottom-color:var(--acc);}
+    .tab-body{display:none;padding:.8rem 0;font-size:12px;color:var(--muted);line-height:1.9;}
+    .tab-body.active{display:block;}
+    .spec-row{display:flex;justify-content:space-between;padding:.35rem 0;border-bottom:1px solid var(--brd);font-size:11px;}
+    .spec-row:last-child{border:none;}
+    .spec-label{color:var(--muted);}
+    .spec-val{color:var(--txt);}
+
+    /* ── CROSS-SELL ── */
+    .cross-banner{background:var(--bg2);border:1px solid var(--brd);padding:1.2rem;display:flex;align-items:center;gap:1rem;margin:0 2rem 1.5rem;}
+    .cross-items{display:flex;gap:8px;margin-left:auto;}
+    .cross-item{background:var(--bg3);border:1px solid var(--brd);padding:.5rem .8rem;cursor:pointer;display:flex;align-items:center;gap:8px;}
+    .cross-item:hover{border-color:var(--acc);}
+    .cross-item img{width:36px;height:36px;object-fit:cover;}
+    .cross-name{font-size:10px;color:var(--txt);max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block;}
+    .cross-price{font-size:10px;color:var(--acc);font-weight:500;display:block;}
+    .cross-add{background:var(--acc);border:none;color:#fff;padding:4px 8px;font-size:9px;cursor:pointer;font-family:'Montserrat',sans-serif;margin-left:4px;}
+
+    .upsell-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(192,57,43,0.08);}
+
+    /* ── КОШИК DRAWER ── */
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:400;display:none;}
+    .overlay.open{display:block;}
+    .cart-drawer{position:fixed;top:0;right:0;width:340px;height:100%;background:var(--bg2);border-left:1px solid var(--brd);z-index:500;transform:translateX(100%);transition:transform .35s;display:flex;flex-direction:column;}
+    .cart-drawer.open{transform:translateX(0);}
+    .cart-head{padding:1.2rem;border-bottom:1px solid var(--brd);display:flex;align-items:center;justify-content:space-between;}
+    .cart-head h3{font-size:11px;letter-spacing:3px;}
+    .cart-close{background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;}
+    .cart-close:hover{color:var(--acc);}
+    .cart-items{flex:1;overflow-y:auto;padding:1rem;}
+    .cart-item{display:flex;gap:10px;padding:.8rem 0;border-bottom:1px solid var(--brd);}
+    .cart-item:last-child{border:none;}
+    .ci-img{width:52px;height:52px;background:var(--bg3);flex-shrink:0;overflow:hidden;}
+    .ci-img img{width:100%;height:100%;object-fit:cover;}
+    .ci-info{flex:1;}
+    .ci-art{font-size:9px;letter-spacing:1.5px;color:var(--acc);margin-bottom:2px;}
+    .ci-name{font-size:11px;color:var(--txt);line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+    .ci-price{font-size:12px;color:var(--acc);font-weight:500;}
+    .ci-qty{font-size:10px;color:var(--muted);}
+    .ci-rm{background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px;align-self:flex-start;flex-shrink:0;}
+    .ci-rm:hover{color:var(--acc);}
+    .cart-empty{text-align:center;padding:3rem 1rem;color:var(--muted);}
+    .cart-empty i{font-size:40px;display:block;margin-bottom:1rem;color:var(--brd);}
+    .cart-footer{padding:1.2rem;border-top:1px solid var(--brd);}
+    .cart-total-row{display:flex;justify-content:space-between;margin-bottom:1rem;}
+    .cart-total-row span{font-size:12px;color:var(--muted);}
+    .cart-total-row strong{font-size:17px;color:var(--txt);}
+    .checkout-btn{width:100%;background:var(--acc);color:#fff;border:none;padding:13px;font-size:11px;letter-spacing:2.5px;cursor:pointer;font-family:'Montserrat',sans-serif;transition:background .2s;}
+    .checkout-btn:hover{background:var(--acc2);}
+
+    /* ── ПРО НАС / ДОСТАВКА / КОНТАКТИ ── */
+    .page-hero{padding:3.5rem 2rem 2.5rem;background:var(--bg2);border-bottom:1px solid var(--brd);position:relative;overflow:hidden;}
+    .page-hero::before{content:'SENSO';position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-family:'Cormorant Garamond',serif;font-size:90px;font-weight:300;color:rgba(192,57,43,0.04);letter-spacing:10px;pointer-events:none;}
+    .page-tag{font-size:10px;letter-spacing:4px;color:var(--acc);margin-bottom:.8rem;}
+    .page-title{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;}
+    .page-title em{color:var(--acc);font-style:italic;}
+    .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(192,57,43,0.08);margin:2.5rem;}
+    .info-block{background:var(--bg2);padding:2.5rem;}
+    .info-block h3{font-size:10px;letter-spacing:3px;color:var(--acc);margin-bottom:1rem;font-weight:400;}
+    .info-block p{font-size:13px;color:var(--muted);line-height:2;}
+    .info-block strong{color:var(--txt);font-weight:400;}
+    .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(192,57,43,0.08);margin:0 2.5rem 2.5rem;}
+    .val-card{background:var(--bg3);padding:2rem;text-align:center;}
+    .val-card i{font-size:28px;color:var(--acc);display:block;margin-bottom:.8rem;}
+    .val-card h4{font-size:11px;letter-spacing:2px;color:var(--txt);margin-bottom:.5rem;font-weight:400;}
+    .val-card p{font-size:12px;color:var(--muted);line-height:1.7;}
+    .steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(192,57,43,0.08);margin:2.5rem;}
+    .step-card{background:var(--bg2);padding:2rem 1.5rem;}
+    .step-num{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;color:rgba(192,57,43,0.15);line-height:1;margin-bottom:.5rem;}
+    .step-card h4{font-size:11px;letter-spacing:1.5px;color:var(--txt);margin-bottom:.5rem;font-weight:400;}
+    .step-card p{font-size:12px;color:var(--muted);line-height:1.7;}
+    .pay-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(192,57,43,0.08);margin:0 2.5rem 2.5rem;}
+    .pay-card{background:var(--bg2);padding:2rem;display:flex;align-items:center;gap:1rem;}
+    .pay-card i{font-size:26px;color:var(--acc);flex-shrink:0;}
+    .pay-card h4{font-size:11px;letter-spacing:1.5px;color:var(--txt);margin-bottom:.3rem;font-weight:400;}
+    .pay-card p{font-size:12px;color:var(--muted);line-height:1.6;}
+    .contacts-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(192,57,43,0.08);margin:2.5rem;}
+    .cont-block{background:var(--bg2);padding:2.5rem;}
+    .cont-block h3{font-size:10px;letter-spacing:3px;color:var(--acc);margin-bottom:1.5rem;font-weight:400;}
+    .cont-item{display:flex;align-items:center;gap:1rem;padding:.7rem 0;border-bottom:1px solid var(--brd);}
+    .cont-item:last-child{border:none;}
+    .cont-item i{font-size:19px;color:var(--acc);width:22px;flex-shrink:0;}
+    .cont-label{font-size:10px;letter-spacing:1.5px;color:var(--muted);display:block;margin-bottom:2px;}
+    .cont-val{font-size:13px;color:var(--txt);}
+    .faq-item{border-bottom:1px solid var(--brd);}
+    .faq-q{padding:.9rem 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:13px;color:var(--txt);}
+    .faq-q i{font-size:15px;color:var(--acc);transition:transform .3s;flex-shrink:0;}
+    .faq-a{font-size:12px;color:var(--muted);line-height:1.9;max-height:0;overflow:hidden;transition:max-height .4s,padding .3s;}
+    .faq-item.open .faq-a{max-height:200px;padding-bottom:1rem;}
+    .faq-item.open .faq-q i{transform:rotate(45deg);}
+
+    /* ── ПАГІНАЦІЯ ── */
+    .pagination{display:flex;justify-content:center;gap:5px;padding:2rem;}
+    .page-btn{background:var(--bg2);border:1px solid var(--brd);color:var(--muted);width:33px;height:33px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;border-radius:2px;transition:all .2s;}
+    .page-btn:hover,.page-btn.active{background:var(--acc);border-color:var(--acc);color:#fff;}
+
+    /* ── FOOTER ── */
+    .footer{background:#040202;padding:2.5rem 2rem;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;border-top:1px solid var(--brd);}
+    .footer-logo{font-family:'Cormorant Garamond',serif;font-size:19px;letter-spacing:6px;font-weight:300;margin-bottom:.8rem;}
+    .footer-logo em{color:var(--acc);font-style:normal;}
+    .footer-desc{font-size:12px;color:#3a2020;line-height:1.9;max-width:200px;}
+    .footer-col h4{font-size:10px;letter-spacing:3px;color:var(--acc);margin-bottom:1.2rem;font-weight:400;}
+    .footer-col a{display:block;font-size:12px;color:#3a2020;text-decoration:none;margin-bottom:.5rem;cursor:pointer;transition:color .2s;}
+    .footer-col a:hover{color:var(--acc);}
+    .footer-bottom{background:#020101;color:#2a1010;font-size:10px;padding:.9rem 2rem;display:flex;justify-content:space-between;letter-spacing:1.5px;}
+
+    /* ── TG FAB ── */
+    .tg-fab{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--acc);color:#fff;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:21px;cursor:pointer;z-index:200;box-shadow:0 4px 20px rgba(192,57,43,0.4);transition:transform .2s,background .2s;}
+    .tg-fab:hover{transform:scale(1.1);background:var(--acc2);}
+
+    /* ── TOAST ── */
+    .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--bg2);border:1px solid var(--brd);color:var(--txt);padding:.6rem 1.4rem;font-size:11px;letter-spacing:1px;z-index:999;opacity:0;transition:opacity .3s;white-space:nowrap;pointer-events:none;border-radius:2px;}
+    .toast.show{opacity:1;}
+
+    /* ── REVEAL ANIMATIONS ── */
+    .reveal{opacity:0;transform:translateY(30px);transition:opacity .6s,transform .6s;}
+    .reveal.visible{opacity:1;transform:none;}
+
+    @keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
+    @keyframes fadeIn{to{opacity:1;}}
+    @keyframes pulse{0%,100%{transform:scale(1);opacity:.8;}50%{transform:scale(1.06);opacity:.4;}}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="logo" onclick="showPage('home')">SENSO<em>.</em></a>
+  <div class="nav-links">
+    <a onclick="showPage('catalog')">Каталог</a>
+    <a onclick="showPage('about')">Про нас</a>
+    <a onclick="showPage('delivery')">Доставка</a>
+    <a onclick="showPage('contacts')">Контакти</a>
+  </div>
+  <div class="nav-r">
+    <i class="ti ti-search" onclick="showPage('catalog')"></i>
+    <i class="ti ti-heart"></i>
+    <div class="cart-wrap" onclick="openCart()">
+      <i class="ti ti-shopping-bag"></i>
+      <div class="cart-badge" id="cart-badge">0</div>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════ ГОЛОВНА ══════════ -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-tag">SENSO STORE · ОФІЦІЙНИЙ МАГАЗИН</div>
+      <h1 class="hero-title">Відчуй<strong>більше</strong></h1>
+      <p class="hero-desc">Преміальні товари для дорослих. Безпечно, конфіденційно, швидко — по всій Україні. Сертифіковано МОЗ України.</p>
+      <div class="hero-btns">
+        <button class="btn" onclick="showPage('catalog')">КАТАЛОГ <i class="ti ti-arrow-right"></i></button>
+        <button class="btn-outline" onclick="showPage('about')">ПРО НАС</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-frame">
+        <i class="ti ti-sparkles"></i>
+        <span>SENSO 2025</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <span><i class="ti ti-shield-check"></i> БЕЗКОШТОВНА ДОСТАВКА ВІД 1500 ГРН</span>
+    <span><i class="ti ti-package"></i> ДИСКРЕТНЕ ПАКУВАННЯ</span>
+    <span><i class="ti ti-certificate"></i> СЕРТИФІКОВАНО МОЗ</span>
+    <span><i class="ti ti-refresh"></i> ПОВЕРНЕННЯ 14 ДНІВ</span>
+  </div>
+
+  <div class="section reveal">
+    <div class="sec-hd">
+      <div class="sec-title">Ката<em>логорії</em></div>
+    </div>
+    <div class="cats-grid">
+      <div class="cat-card" onclick="filterCat('for-her')">
+        <i class="ti ti-heart"></i>
+        <div class="cat-name">ДЛЯ НЕЇ</div>
+        <div class="cat-count" id="cnt-for-her">0 товарів</div>
+      </div>
+      <div class="cat-card" onclick="filterCat('for-him')">
+        <i class="ti ti-bolt"></i>
+        <div class="cat-name">ДЛЯ НЬОГО</div>
+        <div class="cat-count" id="cnt-for-him">0 товарів</div>
+      </div>
+      <div class="cat-card" onclick="filterCat('for-couples')">
+        <i class="ti ti-users"></i>
+        <div class="cat-name">ДЛЯ ПАР</div>
+        <div class="cat-count" id="cnt-for-couples">0 товарів</div>
+      </div>
+      <div class="cat-card" onclick="filterCat('lubricants')">
+        <i class="ti ti-droplet"></i>
+        <div class="cat-name">ЛУБРИКАНТИ</div>
+        <div class="cat-count" id="cnt-lubricants">0 товарів</div>
+      </div>
+      <div class="cat-card" onclick="filterCat('cosmetics')">
+        <i class="ti ti-star"></i>
+        <div class="cat-name">КОСМЕТИКА</div>
+        <div class="cat-count" id="cnt-cosmetics">0 товарів</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section reveal" style="padding-top:0">
+    <div class="sec-hd">
+      <div class="sec-title">Популя<em>рне</em></div>
+      <span class="sec-link" onclick="showPage('catalog')">ВСЕ →</span>
+    </div>
+    <div class="products-grid" id="home-products"></div>
+  </div>
+
+  <div style="background:var(--bg2);border-top:1px solid var(--brd);border-bottom:1px solid var(--brd);padding:3rem 2rem;display:grid;grid-template-columns:1fr auto;align-items:center;gap:2rem;position:relative;overflow:hidden;" class="reveal">
+    <div>
+      <div style="font-size:10px;letter-spacing:3px;color:var(--acc);margin-bottom:.8rem;">ГАРАНТІЯ БЕЗПЕКИ</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;margin-bottom:.8rem;">Дискретна доставка<br>по всій Україні</div>
+      <div style="font-size:12px;color:var(--muted);">Нейтральне пакування · НП та Укрпошта · Відправка в день замовлення</div>
+      <div style="margin-top:1rem;display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:2px;color:var(--green);"><i class="ti ti-certificate"></i> СЕРТИФІКОВАНО МОЗ УКРАЇНИ</div>
+    </div>
+    <button class="btn" onclick="showPage('delivery')">УМОВИ ДОСТАВКИ <i class="ti ti-arrow-right"></i></button>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(192,57,43,0.08);" class="reveal">
+    <div style="background:var(--bg2);padding:2.5rem 2rem;text-align:center;">
+      <i class="ti ti-shield-check" style="font-size:30px;color:var(--acc);display:block;margin-bottom:.8rem;"></i>
+      <h3 style="font-size:11px;letter-spacing:2px;color:var(--txt);margin-bottom:.5rem;font-weight:400;">КОНФІДЕНЦІЙНІСТЬ</h3>
+      <p style="font-size:12px;color:var(--muted);line-height:1.8;">Нейтральне пакування. Жодних назв на коробці.</p>
+    </div>
+    <div style="background:var(--bg2);padding:2.5rem 2rem;text-align:center;">
+      <i class="ti ti-medal" style="font-size:30px;color:var(--acc);display:block;margin-bottom:.8rem;"></i>
+      <h3 style="font-size:11px;letter-spacing:2px;color:var(--txt);margin-bottom:.5rem;font-weight:400;">ЯКІСТЬ</h3>
+      <p style="font-size:12px;color:var(--muted);line-height:1.8;">Сертифікована продукція. МОЗ України.</p>
+    </div>
+    <div style="background:var(--bg2);padding:2.5rem 2rem;text-align:center;">
+      <i class="ti ti-truck-delivery" style="font-size:30px;color:var(--acc);display:block;margin-bottom:.8rem;"></i>
+      <h3 style="font-size:11px;letter-spacing:2px;color:var(--txt);margin-bottom:.5rem;font-weight:400;">ШВИДКА ДОСТАВКА</h3>
+      <p style="font-size:12px;color:var(--muted);line-height:1.8;">НП та Укрпошта. Відправка в день замовлення.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ КАТАЛОГ ══════════ -->
+<div class="page" id="page-catalog">
+  <div style="padding:1.5rem 2rem 1rem;background:var(--bg2);border-bottom:1px solid var(--brd);">
+    <div style="font-size:10px;letter-spacing:2px;color:var(--muted);margin-bottom:.5rem;">SENSO › <span style="color:var(--acc)">Каталог</span></div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;">Ката<em style="color:var(--acc);font-style:italic;">лог</em></div>
+    <div style="font-size:11px;color:var(--muted);margin-top:.3rem;letter-spacing:1px;" id="cat-count-lbl">Завантаження...</div>
+  </div>
+  <div style="padding:.8rem 2rem;background:var(--bg2);border-bottom:1px solid var(--brd);display:flex;gap:10px;">
+    <input class="search-input" type="text" placeholder="Пошук товарів..." id="search-q" oninput="renderCatalog()">
+    <div class="results-count" id="search-info"></div>
+  </div>
+  <div class="catalog-layout">
+    <div class="sidebar">
+      <div class="sb-section">
+        <div class="sb-title">КАТЕГОРІЯ</div>
+        <button class="sb-btn active" onclick="setCat('all',this)" id="cat-all">Всі товари <span class="sb-count" id="n-all">0</span></button>
+        <button class="sb-btn" onclick="setCat('for-her',this)" id="cat-for-her">Для неї <span class="sb-count" id="n-for-her">0</span></button>
+        <button class="sb-btn" onclick="setCat('for-him',this)" id="cat-for-him">Для нього <span class="sb-count" id="n-for-him">0</span></button>
+        <button class="sb-btn" onclick="setCat('for-couples',this)" id="cat-for-couples">Для пар <span class="sb-count" id="n-for-couples">0</span></button>
+        <button class="sb-btn" onclick="setCat('lubricants',this)" id="cat-lubricants">Лубриканти <span class="sb-count" id="n-lubricants">0</span></button>
+        <button class="sb-btn" onclick="setCat('cosmetics',this)" id="cat-cosmetics">Косметика <span class="sb-count" id="n-cosmetics">0</span></button>
+        <button class="sb-btn" onclick="setCat('lingerie',this)" id="cat-lingerie">Білизна <span class="sb-count" id="n-lingerie">0</span></button>
+      </div>
+      <div class="sb-section">
+        <div class="sb-title">СЕГМЕНТ</div>
+        <button class="sb-btn active" onclick="setSeg('all',this)">Всі ціни</button>
+        <button class="sb-btn" onclick="setSeg('budget',this)">До 800 грн</button>
+        <button class="sb-btn" onclick="setSeg('mid',this)">800–2500 грн</button>
+        <button class="sb-btn" onclick="setSeg('premium',this)">2500+ (Люкс)</button>
+      </div>
+      <div class="sb-section">
+        <div class="sb-title">ЦІНА (ГРН)</div>
+        <div class="price-inputs">
+          <input type="number" id="pmin" placeholder="від">
+          <span style="color:var(--muted)">—</span>
+          <input type="number" id="pmax" placeholder="до">
+        </div>
+        <button class="apply-btn" onclick="renderCatalog()">ЗАСТОСУВАТИ</button>
+      </div>
+      <div class="sb-section">
+        <div class="sb-title">СОРТУВАННЯ</div>
+        <select class="sort-sel" id="sort-sel" onchange="renderCatalog()">
+          <option value="d">За замовчуванням</option>
+          <option value="pa">Ціна: від дешевих</option>
+          <option value="pd">Ціна: від дорогих</option>
+          <option value="na">Назва А–Я</option>
+        </select>
+      </div>
+    </div>
+    <div class="catalog-main">
+      <div class="products-grid" id="catalog-grid"></div>
+      <div class="pagination" id="catalog-pagination"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ ПРО НАС ══════════ -->
+<div class="page" id="page-about">
+  <div class="page-hero">
+    <div class="page-tag">ПРО МАГАЗИН</div>
+    <div class="page-title">Про<br><em>нас</em></div>
+  </div>
+  <div class="info-grid">
+    <div class="info-block">
+      <h3>ХТО МИ</h3>
+      <p><strong>SENSO</strong> — український онлайн-магазин преміальних товарів для дорослих.<br><br>Ми зібрали широкий асортимент перевіреної продукції, щоб кожен міг знайти те, що підходить саме йому — без зайвого сорому, зручно і безпечно.</p>
+    </div>
+    <div class="info-block">
+      <h3>НАШІ ПРИНЦИПИ</h3>
+      <p>Ми дбаємо про комфорт і приватність кожного клієнта. Нейтральна упаковка, швидка доставка і чесний сервіс — це наш стандарт. Всі товари сертифіковані МОЗ України.</p>
+    </div>
+  </div>
+  <div class="values-grid">
+    <div class="val-card"><i class="ti ti-shield-check"></i><h4>КОНФІДЕНЦІЙНІСТЬ</h4><p>Нейтральне пакування. Жодних назв на коробці.</p></div>
+    <div class="val-card"><i class="ti ti-certificate"></i><h4>ЯКІСТЬ І БЕЗПЕКА</h4><p>Тільки сертифікована продукція МОЗ України.</p></div>
+    <div class="val-card"><i class="ti ti-heart"></i><h4>ТУРБОТА</h4><p>Відповімо на будь-яке питання. Допоможемо обрати.</p></div>
+  </div>
+</div>
+
+<!-- ══════════ ДОСТАВКА ══════════ -->
+<div class="page" id="page-delivery">
+  <div class="page-hero">
+    <div class="page-tag">УМОВИ РОБОТИ</div>
+    <div class="page-title">Доставка<br><em>та оплата</em></div>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card"><div class="step-num">01</div><h4>ОФОРМЛЕННЯ</h4><p>Обираєш товар, додаєш у кошик, вказуєш дані для доставки</p></div>
+    <div class="step-card"><div class="step-num">02</div><h4>ПІДТВЕРДЖЕННЯ</h4><p>Менеджер підтверджує замовлення протягом 1–2 годин</p></div>
+    <div class="step-card"><div class="step-num">03</div><h4>ВІДПРАВКА</h4><p>Відправляємо в день замовлення або наступного дня</p></div>
+    <div class="step-card"><div class="step-num">04</div><h4>ОТРИМАННЯ</h4><p>Забираєш у відділенні. Нейтральне пакування</p></div>
+  </div>
+  <div class="info-grid">
+    <div class="info-block">
+      <h3>ДОСТАВКА</h3>
+      <p><strong>Нова Пошта</strong> — відділення або поштомат<br><strong>Укрпошта</strong> — відділення по Україні<br><br>Безкоштовна доставка від <strong>1 500 грн</strong><br>Термін доставки: <strong>1–3 робочих дні</strong><br>Пакування: <strong>нейтральне</strong>, без назви магазину</p>
+    </div>
+    <div class="info-block">
+      <h3>ОПЛАТА</h3>
+      <p><strong>LiqPay / Картка</strong> — Visa, Mastercard онлайн<br><strong>Monobank / ПриватБанк</strong> — переказ на картку<br><br>Після оплати надішли скріншот у відповідь на підтвердження замовлення</p>
+    </div>
+  </div>
+  <div class="pay-grid">
+    <div class="pay-card"><i class="ti ti-credit-card"></i><div><h4>LIQPAY / КАРТКА</h4><p>Visa, Mastercard онлайн. Посилання після підтвердження.</p></div></div>
+    <div class="pay-card"><i class="ti ti-building-bank"></i><div><h4>ПЕРЕКАЗ НА РАХУНОК</h4><p>Monobank або ПриватБанк. Реквізити у підтвердженні.</p></div></div>
+    <div class="pay-card"><i class="ti ti-refresh"></i><div><h4>ПОВЕРНЕННЯ</h4><p>14 днів. Товар в оригінальному пакуванні.</p></div></div>
+  </div>
+</div>
+
+<!-- ══════════ КОНТАКТИ ══════════ -->
+<div class="page" id="page-contacts">
+  <div class="page-hero">
+    <div class="page-tag">ЗВ'ЯЖІТЬСЯ З НАМИ</div>
+    <div class="page-title">Конта<em>кти</em></div>
+  </div>
+  <div class="contacts-grid">
+    <div class="cont-block">
+      <h3>НАШІ КОНТАКТИ</h3>
+      <div class="cont-item"><i class="ti ti-phone"></i><div><span class="cont-label">ТЕЛЕФОН</span><span class="cont-val">063 574 3464</span></div></div>
+      <div class="cont-item"><i class="ti ti-brand-telegram"></i><div><span class="cont-label">TELEGRAM</span><span class="cont-val">@eterrnitas</span></div></div>
+      <div class="cont-item"><i class="ti ti-clock"></i><div><span class="cont-label">ГРАФІК</span><span class="cont-val">Пн–Нд: 9:00 – 21:00</span></div></div>
+    </div>
+    <div class="cont-block">
+      <h3>ЧАСТІ ПИТАННЯ</h3>
+      <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Пакування справді нейтральне? <i class="ti ti-plus"></i></div><div class="faq-a">Так, 100%. На посилці не буде жодних написів або натяків на вміст.</div></div>
+      <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Як швидко доставляють? <i class="ti ti-plus"></i></div><div class="faq-a">Відправляємо в день замовлення (до 14:00). НП — 1–2 дні по Україні.</div></div>
+      <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Чи можу повернути товар? <i class="ti ti-plus"></i></div><div class="faq-a">Так, 14 днів. Товар має бути в оригінальному непошкодженому пакуванні.</div></div>
+      <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Товари сертифіковані? <i class="ti ti-plus"></i></div><div class="faq-a">Так. Всі товари мають сертифікати відповідності МОЗ України. Безпечні матеріали.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div><div class="footer-logo">SENSO<em>.</em></div><p class="footer-desc">Преміальні товари для дорослих. Конфіденційність та якість — наш пріоритет.</p></div>
+  <div class="footer-col"><h4>КАТАЛОГ</h4><a onclick="filterCat('for-her')">Для неї</a><a onclick="filterCat('for-him')">Для нього</a><a onclick="filterCat('for-couples')">Для пар</a><a onclick="filterCat('lubricants')">Лубриканти</a></div>
+  <div class="footer-col"><h4>МАГАЗИН</h4><a onclick="showPage('about')">Про нас</a><a onclick="showPage('delivery')">Доставка та оплата</a><a onclick="showPage('contacts')">Контакти</a></div>
+  <div class="footer-col"><h4>КОНТАКТИ</h4><a>063 574 3464</a><a>@eterrnitas</a><a>Telegram</a></div>
+</footer>
+<div class="footer-bottom"><span>© 2025 SENSO. ВСІ ПРАВА ЗАХИЩЕНІ.</span><span>ПОЛІТИКА КОНФІДЕНЦІЙНОСТІ</span></div>
+
+<!-- CART DRAWER -->
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-head"><h3>КОШИК</h3><button class="cart-close" onclick="closeCart()"><i class="ti ti-x"></i></button></div>
+  <div class="cart-items" id="cart-items-list"></div>
+  <div class="cart-footer" id="cart-footer" style="display:none">
+    <div class="cart-total-row"><span>Разом:</span><strong id="cart-total">0 грн</strong></div>
+    <button class="checkout-btn" onclick="goCheckout()">ОФОРМИТИ ЗАМОВЛЕННЯ →</button>
+  </div>
+</div>
+
+<div class="tg-fab" onclick="window.open('https://t.me/eterrnitas','_blank')"><i class="ti ti-brand-telegram"></i></div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ── КОНФІГ ──
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyHBabF915ipctX1GAT8gfzHaEuMdg_Elbvau9aJU3pkLNaBSVhmkB3F9FsD-ekm9dTbQ/exec';
+const CAT_NAMES = {'for-her':'Для неї','for-him':'Для нього','for-couples':'Для пар','lubricants':'Лубриканти','cosmetics':'Косметика','lingerie':'Білизна'};
+const PER_PAGE = 24;
+
+let CATALOG = [];
+let cart = [];
+let currentCat = 'all';
+let currentSeg = 'all';
+let currentPage = 1;
+let currentProduct = null;
+
+// ── ЗАВАНТАЖЕННЯ КАТАЛОГУ ──
+fetch('catalog.json')
+  .then(r => r.json())
+  .then(data => {
+    CATALOG = data;
+    initCounts();
+    renderHomeProducts();
+    renderCatalog();
+  });
+
+function initCounts() {
+  const cats = ['for-her','for-him','for-couples','lubricants','cosmetics','lingerie'];
+  const total = CATALOG.filter(i=>!i.notify).length;
+  document.getElementById('n-all').textContent = total;
+  cats.forEach(c => {
+    const cnt = CATALOG.filter(i=>i.category===c&&!i.notify).length;
+    const el = document.getElementById('n-'+c);
+    if(el) el.textContent = cnt;
+    const hel = document.getElementById('cnt-'+c);
+    if(hel) hel.textContent = cnt + ' товарів';
+  });
+}
+
+// ── ГОЛОВНА — топ товари ──
+function renderHomeProducts() {
+  const top = CATALOG.filter(i=>!i.notify&&i.price).slice(0,8);
+  document.getElementById('home-products').innerHTML = top.map(renderCard).join('');
+}
+
+// ── КАТАЛОГ ──
+function getFiltered() {
+  let items = [...CATALOG];
+  if(currentCat !== 'all') items = items.filter(i=>i.category===currentCat);
+  if(currentSeg==='budget') items = items.filter(i=>i.notify||(i.price&&i.price<=800));
+  else if(currentSeg==='mid') items = items.filter(i=>i.notify||(i.price&&i.price>800&&i.price<=2500));
+  else if(currentSeg==='premium') items = items.filter(i=>i.notify||(i.price&&i.price>2500));
+  const pmin = parseFloat(document.getElementById('pmin')?.value)||null;
+  const pmax = parseFloat(document.getElementById('pmax')?.value)||null;
+  if(pmin) items = items.filter(i=>i.notify||(i.price&&i.price>=pmin));
+  if(pmax) items = items.filter(i=>i.notify||(i.price&&i.price<=pmax));
+  const q = document.getElementById('search-q')?.value.toLowerCase().trim()||'';
+  if(q) items = items.filter(i=>i.name.toLowerCase().includes(q));
+  const sort = document.getElementById('sort-sel')?.value||'d';
+  if(sort==='pa') items.sort((a,b)=>(a.price||0)-(b.price||0));
+  else if(sort==='pd') items.sort((a,b)=>(b.price||0)-(a.price||0));
+  else if(sort==='na') items.sort((a,b)=>a.name.localeCompare(b.name,'uk'));
+  return items;
+}
+
+function renderCatalog() {
+  const filtered = getFiltered();
+  const total = filtered.length;
+  const pages = Math.ceil(total/PER_PAGE);
+  if(currentPage > pages) currentPage = 1;
+  const slice = filtered.slice((currentPage-1)*PER_PAGE, currentPage*PER_PAGE);
+  document.getElementById('cat-count-lbl').textContent = total + ' товарів';
+  document.getElementById('search-info').textContent = '';
+  const grid = document.getElementById('catalog-grid');
+  grid.innerHTML = slice.length ? slice.map((it,i)=>renderCard(it,i)).join('') :
+    '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--muted)"><i class="ti ti-search" style="font-size:40px;display:block;margin-bottom:1rem;"></i>Товарів не знайдено</div>';
+  renderPagination(pages);
+}
+
+function renderCard(item, idx=0) {
+  const lux = item.price && item.price > 3000;
+  const badge = item.notify ? '<div class="prod-badge soon">НЕЗАБАРОМ</div>' :
+    lux ? '<div class="prod-badge lux">ЛЮКС</div>' : '';
+  const img = item.photo ?
+    `<img src="${item.photo}" alt="${item.name}" loading="lazy" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+     <div class="prod-img-ph" style="display:none"><i class="ti ti-photo"></i></div>` :
+    `<div class="prod-img-ph"><i class="ti ti-photo"></i></div>`;
+  const btn = item.notify ?
+    `<button class="add-btn notify">ПОВІДОМИТИ ПРО НАЯВНІСТЬ</button>` :
+    `<button class="add-btn" onclick="event.stopPropagation();addToCart('${item.id}','${item.name.replace(/'/g,"\\'")}',${item.price},'${item.photo}','${item.id}')">В КОШИК</button>`;
+  const price = item.notify ?
+    `<div class="prod-notify">Очікується надходження</div>` :
+    `<div class="prod-price">${item.price.toLocaleString('uk-UA')} грн</div>`;
+  return `<div class="prod-card" style="animation:fadeUp .35s ${idx*0.03}s both" onclick="openProduct('${item.id}')">
+    <div class="prod-img">${badge}${img}<div class="prod-overlay">${btn}</div></div>
+    <div class="prod-info">
+      <div class="prod-sub">${item.subcategory||CAT_NAMES[item.category]||''}</div>
+      <div class="prod-name">${item.name}</div>
+      ${price}
+    </div>
+  </div>`;
+}
+
+function renderPagination(pages) {
+  const pgn = document.getElementById('catalog-pagination');
+  if(!pgn||pages<=1){if(pgn)pgn.innerHTML='';return;}
+  let h = `<button class="page-btn" onclick="goPage(${currentPage-1})" ${currentPage===1?'disabled':''}>‹</button>`;
+  for(let p=1;p<=pages;p++){
+    if(p===1||p===pages||Math.abs(p-currentPage)<=1)
+      h+=`<button class="page-btn${p===currentPage?' active':''}" onclick="goPage(${p})">${p}</button>`;
+    else if(Math.abs(p-currentPage)===2)
+      h+=`<span style="color:var(--muted);padding:0 3px">…</span>`;
+  }
+  h+=`<button class="page-btn" onclick="goPage(${currentPage+1})" ${currentPage===pages?'disabled':''}>›</button>`;
+  pgn.innerHTML=h;
+}
+
+function goPage(p){
+  const pages=Math.ceil(getFiltered().length/PER_PAGE);
+  if(p<1||p>pages)return;
+  currentPage=p; renderCatalog();
+  document.querySelector('.catalog-main').scrollIntoView({behavior:'smooth'});
+}
+
+function setCat(cat,el){
+  currentCat=cat; currentPage=1;
+  document.querySelectorAll('.sb-btn[id^="cat-"]').forEach(b=>b.classList.remove('active'));
+  if(el)el.classList.add('active');
+  renderCatalog();
+}
+
+function setSeg(seg,el){
+  currentSeg=seg; currentPage=1;
+  document.querySelectorAll('.sb-section:nth-child(2) .sb-btn').forEach(b=>b.classList.remove('active'));
+  if(el)el.classList.add('active');
+  renderCatalog();
+}
+
+function filterCat(cat){
+  currentCat=cat; currentPage=1;
+  showPage('catalog');
+  document.querySelectorAll('.sb-btn[id^="cat-"]').forEach(b=>b.classList.remove('active'));
+  const btn=document.getElementById('cat-'+cat);
+  if(btn)btn.classList.add('active');
+  setTimeout(()=>renderCatalog(),50);
+}
+
+// ── КОШИК ──
+function addToCart(id,name,price,photo,art){
+  const ex=cart.find(i=>i.id===id);
+  if(ex)ex.qty++;
+  else cart.push({id,name,price,photo,art,qty:1});
+  updateCartUI();
+  showToast('✓ Додано до кошика');
+  setTimeout(()=>openCart(),350);
+}
+
+function removeFromCart(id){
+  cart=cart.filter(i=>i.id!==id);
+  updateCartUI();
+}
+
+function updateCartUI(){
+  const total=cart.reduce((s,i)=>s+i.qty,0);
+  document.getElementById('cart-badge').textContent=total;
+  const list=document.getElementById('cart-items-list');
+  const footer=document.getElementById('cart-footer');
+  if(!cart.length){
+    list.innerHTML='<div class="cart-empty"><i class="ti ti-shopping-bag"></i><p style="font-size:11px;letter-spacing:1px;">КОШИК ПОРОЖНІЙ</p></div>';
+    footer.style.display='none'; return;
+  }
+  footer.style.display='block';
+  list.innerHTML=cart.map(it=>`
+    <div class="cart-item">
+      <div class="ci-img"><img src="${it.photo}" onerror="this.style.display='none'"></div>
+      <div class="ci-info">
+        <div class="ci-art">${it.art}</div>
+        <div class="ci-name">${it.name}</div>
+        <div class="ci-price">${(it.price*it.qty).toLocaleString('uk-UA')} грн</div>
+        <div class="ci-qty">К-сть: ${it.qty}</div>
+      </div>
+      <button class="ci-rm" onclick="removeFromCart('${it.id}')"><i class="ti ti-x"></i></button>
+    </div>`).join('');
+  const sum=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  document.getElementById('cart-total').textContent=sum.toLocaleString('uk-UA')+' грн';
+}
+
+function openCart(){document.getElementById('cart-drawer').classList.add('open');document.getElementById('overlay').classList.add('open');}
+function closeCart(){document.getElementById('cart-drawer').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
+function goCheckout(){closeCart();showPage('checkout');}
+
+// ── СТОРІНКИ ──
+function showPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const pg=document.getElementById('page-'+name);
+  if(pg){pg.classList.add('active');}
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── REVEAL SCROLL ──
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ── TOAST ──
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2300);
+}
+
+// ── CHECKOUT PAGE ──
+function openProduct(id){
+  // Поки що просто додаємо в кошик при кліку — сторінку товару зробимо окремо
+  const item=CATALOG.find(i=>i.id===id);
+  if(!item||item.notify)return;
+  addToCart(item.id,item.name,item.price,item.photo,item.id);
+}
+
+// Init
+updateCartUI();
+</script>
+</body>
+</html>
